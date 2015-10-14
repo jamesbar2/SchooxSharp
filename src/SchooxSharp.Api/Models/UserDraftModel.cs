@@ -2,11 +2,11 @@
 // http://www.xamasoft.com/json-class-generator
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace SchooxSharp.Api.Models
 {
-
+    /*
     public class User
     {
 
@@ -461,5 +461,5 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("points")]
         public Points Points { get; set; }
     }
-
+    */
 }

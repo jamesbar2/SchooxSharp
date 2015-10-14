@@ -16,12 +16,14 @@ namespace SchooxSharp.Api.Helpers
 			QueryDictionary = new Dictionary<string, object> ();
 		}
 
-		public void Add(string key, object? value)
-		{
-			if(value.HasValue && value != null && !string.IsNullOrWhiteSpace(value.ToString()))
-				QueryDictionary.Add(key, value.Value);
-		}
-
+        /// <summary>
+        /// Adds a non-null, non-blank, non-whitespace only query value to the query string dictionary
+        /// </summary>
+        /// <param name="key">Key of the query string item</param>
+        /// <param name="value">Value of the query string item, note that the value will be ToString'ed 
+        /// and any special formats should beforehand.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
 		public void Add(string key, object value)
 		{
 			if (value != null && !string.IsNullOrWhiteSpace (value.ToString ()))

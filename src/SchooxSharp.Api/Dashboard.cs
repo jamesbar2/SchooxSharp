@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp;
+using RestSharp.Serializers;
 using SchooxSharp.Api.Helpers;
+using SchooxSharp.Api.Models;
 
 namespace SchooxSharp.Api
 {
@@ -17,10 +21,8 @@ namespace SchooxSharp.Api
     /// region or location (Access Level: Region Managers, Local Managers). 
     /// You can simulate a user's view by his/her schooX ID.
     /// </summary>
-    public class Dashboard
+    public class Dashboard : SchooxApiBase
     {
-		public ISchooxService SService { get; set; }
-
 		public Dashboard(ISchooxService service) 
 		{
 			SService = service;
@@ -48,28 +50,27 @@ namespace SchooxSharp.Api
 		/// <param name="start">List's starting position</param>
 		/// <param name="limit">Number of users to return per request, up to maximum of 1,000. Default to 100</param>
 		/// <param name="sort">Sorting criteria</param>
-        public List<object> GetUsers(string role, int? userId = null, string externalId = null, 
+        public SchooxResponse<List<User>> GetUsers(string role, int? userId = null, string externalId = null, 
 			int? aboveId = null, int? unitId = null, int? jobId = null, int? start = null, 
 			int? limit = 100, string sort = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/users
-			var path = "/dashboard/users";
+		    var request = SService.GenerateBaseRequest("/dashboard/users");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder();
-			db.Add ("role", role);
-			db.Add ("userId", userId);
-			db.Add ("external_id", externalId);
-			db.Add ("aboveId", aboveId);
-			db.Add ("unitId", unitId);
-			db.Add ("jobId", jobId);
-			db.Add ("start", start);
-			db.Add ("limit", limit);
-			db.Add ("sort", sort);
+			request.AddNonBlankQueryString ("role", role);
+			request.AddNonBlankQueryString ("userId", userId);
+			request.AddNonBlankQueryString ("external_id", externalId);
+			request.AddNonBlankQueryString ("aboveId", aboveId);
+			request.AddNonBlankQueryString ("unitId", unitId);
+			request.AddNonBlankQueryString ("jobId", jobId);
+			request.AddNonBlankQueryString ("start", start);
+			request.AddNonBlankQueryString ("limit", limit);
+			request.AddNonBlankQueryString ("sort", sort);
 
-
-			throw new NotImplementedException ();
+		    return Execute<List<User>>(request);
 		}
 
 		/// <summary>
@@ -82,19 +83,18 @@ namespace SchooxSharp.Api
 		/// her total training and training information by course</returns>
 		/// <param name="userId">User identifier.</param>
 		/// <param name="externalId">Sets whether the id given is the external_id of the User.  By default, the value is "false"</param>
-		public List<object> GetUserCourses(int userId, string externalId = null)
+		public SchooxResponse<List<Course>> GetUserCourses(int userId, string externalId = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/users/:userid/courses
-			var path = string.Format("/dashboard/users/{0}/courses", userId);
+			var request = SService.GenerateBaseRequest("/dashboard/users/{userId}/courses");
+            request.Method = Method.GET;
 
-			if (externalId != null) {
-				var db = new DictionaryQueryBuilder ();
-				db.Add ("external_id", externalId);
-			}
-		
-			throw new NotImplementedException ();
+		    request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture));
+			request.AddNonBlankQueryString ("external_id", externalId);
+
+		    return Execute<List<Course>>(request);
 		}
 
 		/// <summary>
@@ -108,18 +108,16 @@ namespace SchooxSharp.Api
 		/// <param name="userId">User identifier.</param>
 		/// <param name="externalId">Sets whether the id given is the external_id of the User.  
 		/// By default, the value is "false"</param>
-		public List<object> GetUserCurriculums(int userId, string externalId = null)
+		public SchooxResponse<List<object>> GetUserCurriculums(int userId, string externalId = null)
 		{
 			//TODO: Validation
 		
 			//GET /dashboard/users/:userid/courses
-			var path = string.Format("/dashboard/users/{0}/courses", userId);
+			var request = SService.GenerateBaseRequest("/dashboard/users/{userId}/courses");
+            request.Method = Method.GET;
 
-			if (externalId != null) {
-				var db = new DictionaryQueryBuilder ();
-				db.Add ("external_id", externalId);
-			}
-
+            request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture));
+            request.AddNonBlankQueryString("external_id", externalId);
 
 			throw new NotImplementedException ();
 		}
@@ -134,18 +132,17 @@ namespace SchooxSharp.Api
 		/// <param name="userId">User identifier.</param>
 		/// <param name="externalId">Sets whether the id given is the external_id of the User.  
 		/// By default, the value is "false"</param>
-		public List<object> GetUserExams(int userId, string externalId = null)
+		public SchooxResponse<List<object>> GetUserExams(int userId, string externalId = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/users/:userid/courses
-			var path = string.Format("/dashboard/users/:userid/courses", userId);
+		    var request = SService.GenerateBaseRequest("/dashboard/users/{userId}/courses");
+            request.Method = Method.GET;
 
-			if (externalId != null) {
-				var db = new DictionaryQueryBuilder ();
-				db.Add ("external_id", externalId);
-			}
-
+            request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture)); 
+           	request.AddNonBlankQueryString ("external_id", externalId);
+			
 			throw new NotImplementedException ();
 		}
 
@@ -154,15 +151,15 @@ namespace SchooxSharp.Api
 		/// </summary>
 		/// <returns>List of all courses with title, short description and image.</returns>
 		/// <param name="role">User's role.</param>
-		public List<object> GetCourses(string role)
+		public SchooxResponse<List<object>> GetCourses(string role)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/courses
-			var path = "/dashboard/courses";
+			var request = SService.GenerateBaseRequest("/dashboard/courses");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder ();
-			db.Add ("role", role);
+			request.AddNonBlankQueryString ("role", role);
 
 			throw new NotImplementedException ();
 		}
@@ -181,25 +178,27 @@ namespace SchooxSharp.Api
 		/// <param name="letter">Lastname's starting letter</param>
 		/// <param name="start">List's starting position</param>
 		/// <param name="limit">Number of users to return per request, up to maximum of 1,000. Default to 100</param>
-		/// <param name="sort">Sorting critera</param>
-		public List<object> GetEnrolledUsersInCourse(int courseId, string role, int? regionId = null, 
-			int? locationId = null, int jobId = null, string letter = null, int? start = null, 
+		/// <param name="sort">Sorting criteria</param>
+		public SchooxResponse<List<object>> GetEnrolledUsersInCourse(int courseId, string role, int? regionId = null, 
+			int? locationId = null, int? jobId = null, string letter = null, int? start = null, 
 			int? limit = 100, string sort = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/courses/:courseid
-			var path = string.Format ("/dashboard/courses/{0}", courseId);
+            var request = SService.GenerateBaseRequest("/dashboard/courses/{courseId}");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder();
-			db.Add ("role", role);
-			db.Add ("regionId", regionId);
-			db.Add ("locationId", locationId);
-			db.Add ("jobId", jobId);
-			db.Add ("letter", letter);
-			db.Add ("start", start);
-			db.Add ("limit", limit);
-			db.Add ("sort", sort);
+            request.AddUrlSegment("courseId", courseId.ToString(CultureInfo.InvariantCulture)); 
+
+			request.AddNonBlankQueryString ("role", role);
+			request.AddNonBlankQueryString ("regionId", regionId);
+			request.AddNonBlankQueryString ("locationId", locationId);
+			request.AddNonBlankQueryString ("jobId", jobId);
+			request.AddNonBlankQueryString ("letter", letter);
+			request.AddNonBlankQueryString ("start", start);
+			request.AddNonBlankQueryString ("limit", limit);
+			request.AddNonBlankQueryString ("sort", sort);
 
 
 			throw new NotImplementedException ();
@@ -217,17 +216,18 @@ namespace SchooxSharp.Api
 		/// <param name="userId">User identifier.</param>
 		/// <param name="externalId">Sets whether the id given is the external_id of the User.
 		/// By default, the value is "false"</param>
-		public Tuple<object, object, object> GetDetailedCourseProgressForUser(int courseId, int userId, string externalId = null)
+		public SchooxResponse<Tuple<object, object, object>> GetDetailedCourseProgressForUser(int courseId, int userId, string externalId = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/courses/:courseid/users/:userid
-			var path = string.Format("/dashboard/courses/{0}/users/{1}", courseId, userId);
+            var request = SService.GenerateBaseRequest("/dashboard/courses/{courseId}/users/{userId}");
+            request.Method = Method.GET;
 
-			if (externalId != null) {
-				var db = new DictionaryQueryBuilder ();
-				db.Add ("external_id", externalId);
-			}
+            request.AddUrlSegment("courseId", courseId.ToString(CultureInfo.InvariantCulture));
+            request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture)); 
+
+			request.AddNonBlankQueryString ("external_id", externalId);
 
 			throw new NotImplementedException ();
 		}
@@ -237,15 +237,15 @@ namespace SchooxSharp.Api
 		/// </summary>
 		/// <returns>A list of all curriculums with title, short description, image and number of courses</returns>
 		/// <param name="role">Users' role</param>
-		public List<object> GetCurriculums(string role)
+		public SchooxResponse<List<object>> GetCurriculums(string role)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/curriculums
-			var path = "/dashboard/curriculums";
+			var request = SService.GenerateBaseRequest("/dashboard/curriculums");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder ();
-			db.Add ("role", role);
+			request.AddNonBlankQueryString ("role", role);
 
 			throw new NotImplementedException ();
 		}
@@ -264,31 +264,33 @@ namespace SchooxSharp.Api
 		/// <param name="start">List's starting position</param>
 		/// <param name="limit">Number of users to return per request, up to maximum of 1,000. Default to 100</param>
 		/// <param name="sort">Sorting critera</param>
-		public List<object> GetEnrolledUsersInCurriculum(int curriculumId, string role, int? regionId = null, 
+		public SchooxResponse<List<object>> GetEnrolledUsersInCurriculum(int curriculumId, string role, int? regionId = null, 
 			int? locationId = null, int? jobId = null, string letter = null, int? start = null,
 			int? limit = null, string sort = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/curriculums/:curriculumid
-			var path = string.Format ("/dashboard/curriculums/{0}", curriculumId);
+		    var request = SService.GenerateBaseRequest("/dashboard/curriculums/{curriculumId}");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder ();
-			db.Add ("role", role);
-			db.Add ("regionId", regionId);
-			db.Add ("locationId", locationId);
-			db.Add ("jobId", jobId);
-			db.Add ("letter", letter);
-			db.Add ("start", start);
-			db.Add ("limit", limit);
-			db.Add ("sort", sort);
+		    request.AddUrlSegment("curriculumId", curriculumId.ToString(CultureInfo.InvariantCulture));
+
+            request.AddNonBlankQueryString ("role", role);
+			request.AddNonBlankQueryString ("regionId", regionId);
+			request.AddNonBlankQueryString ("locationId", locationId);
+			request.AddNonBlankQueryString ("jobId", jobId);
+			request.AddNonBlankQueryString ("letter", letter);
+			request.AddNonBlankQueryString ("start", start);
+			request.AddNonBlankQueryString ("limit", limit);
+			request.AddNonBlankQueryString ("sort", sort);
 
 
 			throw new NotImplementedException ();
 		}
 
 		/// <summary>
-		/// Curriculums can consist of one or more courses. This request returns detailed information 
+		/// Curriculum's can consist of one or more courses. This request returns detailed information 
 		/// about a user’s progress on a curriculum for every single course of it (e.g. course name, 
 		/// image, time spent and total progress).
 		/// </summary>
@@ -297,17 +299,18 @@ namespace SchooxSharp.Api
 		/// <param name="userId">User identifier.</param>
 		/// <param name="externalId">Sets whether the id given is the external_id of the User. 
 		/// By default, the value is "false"</param>
-		public object GetCurriculumProgressForUser(int curriculumId, int userId, string externalId = null)
+		public SchooxResponse<object> GetCurriculumProgressForUser(int curriculumId, int userId, string externalId = null)
 		{
 			//TODO: Validation
 
 			//GET /dashboard/curriculums/:curriculumid/users/:userid
-			var path = string.Format("/dashboard/curriculums/{0}/users/{1}", curriculumId, userId);
+			var request = SService.GenerateBaseRequest("/dashboard/curriculums/{curriculumId}/users/{userId}");
+            request.Method = Method.GET;
 
-			if (externalId != null) {
-				var db = new DictionaryQueryBuilder ();
-				db.Add ("external_id", externalId);
-			}
+            request.AddUrlSegment("courseId", curriculumId.ToString(CultureInfo.InvariantCulture));
+            request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture)); 
+
+            request.AddNonBlankQueryString ("external_id", externalId);
 
 			throw new NotImplementedException ();
 		}
@@ -317,15 +320,14 @@ namespace SchooxSharp.Api
 		/// </summary>
 		/// <returns>List of all exams with title, image and publishing date</returns>
 		/// <param name="role">User's role</param>
-		public List<object> GetExams(string role)
+		public SchooxResponse<List<object>> GetExams(string role)
 		{
 			//GET /dashboard/exams
-			var path = "/dashboard/exams";
+			var request = SService.GenerateBaseRequest("/dashboard/exams");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder ();
-			db.Add ("role", role);
-
-
+            request.AddNonBlankQueryString ("role", role);
+            
 			throw new NotImplementedException ();
 		}
 
@@ -344,22 +346,24 @@ namespace SchooxSharp.Api
 		/// <param name="start">List's starting position</param>
 		/// <param name="limit">Number of users to return per request, up to maximum of 1,000. Default to 100</param>
 		/// <param name="sort">Sorting critera</param>
-		public List<object> GetEnrolledUsersInExam(int examId, string role, int? regionId = null, 
+		public SchooxResponse<List<object>> GetEnrolledUsersInExam(int examId, string role, int? regionId = null, 
 			int? locationId = null, int? jobId = null, string letter = null, int? start = null,
 			int? limit = null, string sort = null)
 		{
 			//GET /dashboard/exams/:examid
-			var path = string.Format ("/dashboard/exams/{0}", examId);
+			var request = SService.GenerateBaseRequest("/dashboard/exams/{examId}");
+            request.Method = Method.GET;
 
-			var db = new DictionaryQueryBuilder ();
-			db.Add ("role", role);
-			db.Add ("regionId", regionId);
-			db.Add ("locationId", locationId);
-			db.Add ("jobId", jobId);
-			db.Add ("letter", letter);
-			db.Add ("start", start);
-			db.Add ("limit", limit);
-			db.Add ("sort", sort);
+		    request.AddUrlSegment("examId", examId.ToString(CultureInfo.InvariantCulture));
+
+			request.AddNonBlankQueryString ("role", role);
+			request.AddNonBlankQueryString ("regionId", regionId);
+			request.AddNonBlankQueryString ("locationId", locationId);
+			request.AddNonBlankQueryString ("jobId", jobId);
+			request.AddNonBlankQueryString ("letter", letter);
+			request.AddNonBlankQueryString ("start", start);
+			request.AddNonBlankQueryString ("limit", limit);
+			request.AddNonBlankQueryString ("sort", sort);
 
 			throw new NotImplementedException ();
 		}
