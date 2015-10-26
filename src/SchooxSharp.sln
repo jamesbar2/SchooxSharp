@@ -1,9 +1,11 @@
-﻿`
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Api", "SchooxSharp.Api\SchooxSharp.Api.csproj", "{BD976C34-FB3B-4E17-9CE1-F6A31F322731}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.ApiTests", "SchooxSharp.ApiTests\SchooxSharp.ApiTests.csproj", "{512F41EE-C692-4C76-AB8A-A822947A38BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BD976C34-FB3B-4E17-9CE1-F6A31F322731}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD976C34-FB3B-4E17-9CE1-F6A31F322731}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD976C34-FB3B-4E17-9CE1-F6A31F322731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

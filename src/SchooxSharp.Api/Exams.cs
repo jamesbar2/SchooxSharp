@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SchooxSharp.Api.Helpers;
@@ -34,9 +33,9 @@ namespace SchooxSharp.Api
             //GET /exams
             var path = "/exams";
             
-            var db = new DictionaryQueryBuilder();
-            db.Add("start", start);
-            db.Add("limit",limit);
+            //var db = new DictionaryQueryBuilder();
+            //db.Add("start", start);
+            //db.Add("limit",limit);
 
             throw new NotImplementedException();
         }
@@ -49,9 +48,9 @@ namespace SchooxSharp.Api
             //GET /exams/15/students?acadid=123&start=&limit=100
             var path = string.Format("/exams/{0}/students", examId);
 
-            var db = new DictionaryQueryBuilder();
-            db.Add("start", start);
-            db.Add("limit", limit);
+            //var db = new DictionaryQueryBuilder();
+            //db.Add("start", start);
+            //db.Add("limit", limit);
 
             throw new NotImplementedException();
         }
@@ -63,8 +62,8 @@ namespace SchooxSharp.Api
             //GET /exams/:examid/students/:userid
             var path = string.Format("/exams/{0}/students/{1}", examId, userId);
 
-            var db = new DictionaryQueryBuilder();
-            db.Add("start", start);
+            //var db = new DictionaryQueryBuilder();
+            //db.Add("start", start);
 
             throw new NotImplementedException();
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +22,7 @@ namespace SchooxSharp.Api
         /// The URI the request was made to.  Also useful for debugging if there are issues.
         /// </summary>
         public string RequestUrl { get; set; }
+
     }
 
     /// <summary>
@@ -48,6 +48,35 @@ namespace SchooxSharp.Api
         {
             get { return Response.Data; }
         }
+
+        public bool RequestSuccessful
+        {
+            get
+            {
+                if (Response.ErrorException != null)
+                    return false;
+
+
+                switch (Response.Request.Method)
+                {
+                    case Method.GET:
+                        return Response.StatusCode == HttpStatusCode.OK;
+                    case Method.POST:
+                        return Response.StatusCode == HttpStatusCode.Created;
+                    case Method.PUT:
+                    case Method.DELETE:
+                        return Response.StatusCode == HttpStatusCode.NoContent;
+                }
+
+                return false;
+            }
+        }
+
+        public bool HasResponseError
+        {
+            get { return Response.ErrorException != null; }
+
+        }
     }
 
     public class SchooxResponse : SchooxResponseBase
@@ -61,5 +90,35 @@ namespace SchooxSharp.Api
             StatusCode = response.StatusCode;
             RequestUrl = response.Request.Resource;
         }
+
+        public bool RequestSuccessful
+        {
+            get
+            {
+                if (Response.ErrorException != null)
+                    return false;
+
+
+                switch (Response.Request.Method)
+                {
+                    case Method.GET:
+                        return Response.StatusCode == HttpStatusCode.OK;
+                    case Method.POST:
+                        return Response.StatusCode == HttpStatusCode.Created;
+                    case Method.PUT:
+                    case Method.DELETE:
+                        return Response.StatusCode == HttpStatusCode.NoContent;
+                }
+
+                return false;
+            }
+        }
+
+        public bool HasResponseError
+        {
+            get { return Response.ErrorException != null; }
+
+        }
+
     }
 }
