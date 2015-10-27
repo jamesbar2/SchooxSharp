@@ -38,5 +38,12 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("publish_date")]
         public string PublishDate { get; set; }
 
+        public override string ToString()
+        {
+            return
+                string.Format(
+                    "Id: {0}, Title: {1}, Image: {2}, Url: {3}, Progress: {4}, TotalTime: {5}, EnrollDate: {6}, Students: {7}, CompletionRate: {8}, PublishDate: {9}",
+                    Id, Title, Image, Url, Progress, TotalTime, EnrollDate, Students, CompletionRate, PublishDate);
+        }
     }
 }

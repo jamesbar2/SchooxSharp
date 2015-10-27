@@ -43,5 +43,14 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("is_due")]
         public bool IsDue { get; set; }
+
+        public override string ToString()
+        {
+            return
+                string.Format(
+                    "Id: {0}, Title: {1}, Image: {2}, Students: {3}, CompletionRate: {4}, PublishDate: {5}, Url: {6}, Progress: {7}, TotalTime: {8}, EnrollDate: {9}, Certificates: {10}, DueDate: {11}, IsDue: {12}",
+                    Id, Title, Image, Students, CompletionRate, PublishDate, Url, Progress, TotalTime, EnrollDate,
+                    Certificates, DueDate, IsDue);
+        }
     }
 }

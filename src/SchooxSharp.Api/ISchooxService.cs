@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using RestSharp;
+﻿using RestSharp;
 
 namespace SchooxSharp.Api
 {

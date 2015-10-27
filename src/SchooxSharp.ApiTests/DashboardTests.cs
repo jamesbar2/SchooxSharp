@@ -5,7 +5,7 @@ using SchooxSharp.Api;
 namespace SchooxSharp.ApiTests
 {
     [TestClass]
-    public class DashboardTests
+    public class DashboardTests : SchooxTest
     {
         private Dashboard _dashboard;
         public static TestContext Context { get; set; }
@@ -32,6 +32,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Users returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -44,6 +47,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Courses returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -56,6 +62,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Curriculums returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -68,6 +77,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("User Exams returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -76,11 +88,13 @@ namespace SchooxSharp.ApiTests
             var response = _dashboard.GetCourses(Roles.Employee);
 
             Assert.IsNotNull(response);
-
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Courses returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -95,6 +109,9 @@ namespace SchooxSharp.ApiTests
             
 
             Context.WriteLine("Users returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -110,6 +127,7 @@ namespace SchooxSharp.ApiTests
 
             Context.WriteLine("Certificates: {0}\nExams: {1}\nLectures: {2}", response.Data.Certificates.Count,
                 response.Data.Exams.Count, response.Data.Lectures.Count);
+            Context.WriteLine(response.Response.Content.Replace("{", "{{").Replace("}","}}"));
         }
 
         [TestMethod]
@@ -122,6 +140,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Curriculums: {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -135,6 +156,11 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Users in Curriculum: {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());                
+
+            Context.WriteLine(response.Response.Content.Replace("{", "{{").Replace("}","}}"));
+            Context.WriteLine(response.Response.Content.Replace("{", "{{").Replace("}","}}"));
         }
 
         [TestMethod]
@@ -147,6 +173,10 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Curriculum Progress: {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());                
+
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -159,6 +189,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Exams: {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod]
@@ -171,6 +204,9 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.Data.Any());
 
             Context.WriteLine("Users: {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
     }
 }

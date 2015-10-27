@@ -16,5 +16,9 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("time")]
         public string Time { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format("Id: {0}, Title: {1}, Progress: {2}, Time: {3}", Id, Title, Progress, Time);
+        }
     }
 }

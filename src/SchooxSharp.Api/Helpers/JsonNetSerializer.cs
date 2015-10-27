@@ -21,7 +21,7 @@ using System.IO;
 using Newtonsoft.Json;
 using RestSharp.Serializers;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Helpers
 {
     /// <summary>
     /// Default JSON serializer for request bodies
@@ -42,6 +42,7 @@ namespace SchooxSharp.Api
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Include,
                 DefaultValueHandling = DefaultValueHandling.Include
+                
             };
         }
 

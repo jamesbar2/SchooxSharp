@@ -16,6 +16,11 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("certificates")]
         public List<Certificate> Certificates { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Lectures: {0}, Exams: {1}, Certificates: {2}", Lectures, Exams, Certificates);
+        }
     }
 
 }

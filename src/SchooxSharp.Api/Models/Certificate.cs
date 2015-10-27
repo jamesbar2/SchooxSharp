@@ -18,5 +18,11 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("url")]
         public string Url { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Id: {0}, VerCode: {1}, TotalTime: {2}, TimeCertified: {3}, Url: {4}", Id, VerCode,
+                TotalTime, TimeCertified, Url);
+        }
     }
 }

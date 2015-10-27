@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using SchooxSharp.Api.Helpers;
+using SchooxSharp.Api.Models;
 
 
 namespace SchooxSharp.Api
@@ -12,10 +14,8 @@ namespace SchooxSharp.Api
     /// The following requests relate to getting information regarding the academy's 
     /// exams via the Schoox Academy API. Note: All requests must be Authenticated.
     /// </summary>
-    public class Exams
+    public class Exams : SchooxApiBase
     {
-        public ISchooxService SService { get; set; }
-
         public Exams()
         {
             SService = new SchooxService();
@@ -26,47 +26,68 @@ namespace SchooxSharp.Api
             SService = schooxService;
         }
 
-        public SchooxResponse<List<object>> GetExams(int? start = null, int? limit = null)
+        /// <summary>
+        /// Get a List of Exams
+        /// </summary>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Max size of retrieved courses</param>
+        /// <returns>Returns a list of all academy exams with extended details.</returns>
+        public SchooxResponse<List<Exam>> GetExams(int? start = null, int? limit = null)
         {
             //TODO: Validate 
 
             //GET /exams
-            var path = "/exams";
+            var request = SService.GenerateBaseRequest("/exams");
             
-            //var db = new DictionaryQueryBuilder();
-            //db.Add("start", start);
-            //db.Add("limit",limit);
+            request.AddNonBlankQueryString("start", start);
+            request.AddNonBlankQueryString("limit", limit);
 
-            throw new NotImplementedException();
+            return Execute<List<Exam>>(request);
         }
 
-        public SchooxResponse<List<object>> GetEnrolledUsersInExam(int examId, int? start = null, 
+        /// <summary>
+        /// Get a List of all Enrolled Users in an Exam
+        /// </summary>
+        /// <param name="examId">Exam ID</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Number of users to return per request, up to maximum of 1,000. Default to 100</param>
+        /// <returns>Returns a list of all users that are enrolled in an exam with all of their performance statistics (e.g. date of last attempt, total score and points, passing or failure status).</returns>
+        public SchooxResponse<List<User>> GetEnrolledUsersInExam(int examId, int? start = null, 
             int? limit = null)
         {
             //TODO: Validate 
 
             //GET /exams/15/students?acadid=123&start=&limit=100
-            var path = string.Format("/exams/{0}/students", examId);
+            var request = SService.GenerateBaseRequest("/exams/{examId}/students");
 
-            //var db = new DictionaryQueryBuilder();
-            //db.Add("start", start);
-            //db.Add("limit", limit);
+            request.AddUrlSegment("examId", examId.ToString(CultureInfo.InvariantCulture));
+            request.AddNonBlankQueryString("start", start);
+            request.AddNonBlankQueryString("limit", limit);
 
-            throw new NotImplementedException();
+            return Execute<List<User>>(request);
         }
 
-        public SchooxResponse<object> GetExamPerformanceForUser(int examId, int userId, int? start = null)
+        /// <summary>
+        /// Get Exam Performance for a specific User
+        /// </summary>
+        /// <param name="examId">Exam ID</param>
+        /// <param name="userId">User ID</param>
+        /// <param name="start">Starting position</param>
+        /// Returns detailed performance statistics of an exam for a specific user
+        /// <returns></returns>
+        public SchooxResponse<ExamPerformance> GetExamPerformanceForUser(int examId, int userId, int? start = null)
         {
             //TODO: Validate 
 
             //GET /exams/:examid/students/:userid
-            var path = string.Format("/exams/{0}/students/{1}", examId, userId);
+            var request = SService.GenerateBaseRequest("/exams/{examId}/students/{userId}"); //, examId, userId);
 
-            //var db = new DictionaryQueryBuilder();
-            //db.Add("start", start);
+            request.AddUrlSegment("examId", examId.ToString(CultureInfo.InvariantCulture));
+            request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture));
 
-            throw new NotImplementedException();
+            request.AddNonBlankQueryString("start", start);
 
+            return Execute<ExamPerformance>(request);
         }
 
 

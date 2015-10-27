@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json;
 using RestSharp;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
@@ -133,19 +134,19 @@ namespace SchooxSharp.Api
 		/// <param name="externalId">Sets whether the id given is the external_id of the User.  
 		/// By default, the value is "false"</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public SchooxResponse<List<Exam>> GetUserExams(int userId, string externalId = null)
+        public SchooxResponse<List<UsersExam>> GetUserExams(int userId, string externalId = null)
 		{
             if (userId <= 0)
                 throw new ArgumentOutOfRangeException("userId");
 
-			//GET /dashboard/users/:userid/courses
-		    var request = SService.GenerateBaseRequest("/dashboard/users/{userId}/courses");
+			//GET /dashboard/users/:userid/exams
+		    var request = SService.GenerateBaseRequest("/dashboard/users/{userId}/exams");
             request.Method = Method.GET;
 
             request.AddUrlSegment("userId", userId.ToString(CultureInfo.InvariantCulture)); 
            	request.AddNonBlankQueryString ("external_id", externalId);
 
-            return Execute<List<Exam>>(request);
+            return Execute<List<UsersExam>>(request);
         }
 
 		/// <summary>
@@ -228,8 +229,6 @@ namespace SchooxSharp.Api
         public SchooxResponse<CourseProgress> GetDetailedCourseProgressForUser(int courseId, int userId, string externalId = null)
 		{
 			//TODO: Validation
-
-            //BUG: Cannot parse the object from courses, its receiving a proper response from teh server.  Already validated the model, need to step into the JsonDeserializer.
 
 			//GET /dashboard/courses/:courseid/users/:userid
             var request = SService.GenerateBaseRequest("/dashboard/courses/{courseId}/users/{userId}");

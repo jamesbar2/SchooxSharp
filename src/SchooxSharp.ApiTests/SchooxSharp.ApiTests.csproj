@@ -55,7 +55,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DashboardTests.cs" />
+    <Compile Include="ExamsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchooxTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SchooxSharp.Api\SchooxSharp.Api.csproj">

@@ -13,5 +13,12 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("all")]
         public int All { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Got: {0}, All: {1}", Got, All);
+        }
+
+     
     }
 }

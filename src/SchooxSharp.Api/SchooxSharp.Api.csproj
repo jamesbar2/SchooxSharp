@@ -42,12 +42,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ExamPerformance.cs" />
+    <Compile Include="Models\ExamQuestion.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="Exams.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="ISchooxService.cs" />
-    <Compile Include="JsonNetSerializer.cs" />
+    <Compile Include="Helpers\JsonNetSerializer.cs" />
     <Compile Include="Models\Certificate.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseProgress.cs" />
