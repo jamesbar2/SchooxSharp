@@ -52,6 +52,9 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("attempts")]
         public int? Attempts { get; set; }
 
+        [JsonProperty("profile_url")]
+        public string ProfileUrl { get; set; }
+
         public override string ToString()
         {
             return

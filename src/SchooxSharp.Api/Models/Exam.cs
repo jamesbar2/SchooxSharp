@@ -50,10 +50,35 @@ namespace SchooxSharp.Api.Models
         {
             return
                 string.Format(
-                    "Id: {0}, Name: {1}, Description: {2}, Image: {3}, Instructions: {4}, Attempts: {5}, Points: {6}, Score: {7}, Passed: {8}, Title: {9}, Students: {10}, SuccessRate: {11}, AverageScore: {12}",
-                    Id, Name, Description, Image, Instructions, Attempts, Points, Score, Passed, Title, Students,
-                    SuccessRate, AverageScore);
+                    "Id: {0}, Name: {1}, Description: {2}, Image: {3}, Instructions: {4}, Attempts: {5}, Score: {6}, Points: {7}, Passed: {8}, Title: {9}, Students: {10}, SuccessRate: {11}, AverageScore: {12}, Url: {13}, Type: {14}, TimeLimit: {15}, LectureId: {16}, TimeAdded: {17}, Published: {18}, Disabled: {19}, Creator: {20}",
+                    Id, Name, Description, Image, Instructions, Attempts, Score, Points, Passed, Title, Students,
+                    SuccessRate, AverageScore, Url, Type, TimeLimit, LectureId, TimeAdded, Published, Disabled, Creator);
         }
+
+        //added for /courses/:courseid/exams
+        [JsonProperty("url")]
+        public string Url { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("time_limit")]
+        public string TimeLimit { get; set; }
+
+        [JsonProperty("lecture_id")]
+        public int LectureId { get; set; }
+
+        [JsonProperty("time_added")]
+        public string TimeAdded { get; set; }
+
+        [JsonProperty("published")]
+        public bool Published { get; set; }
+
+        [JsonProperty("disabled")]
+        public bool Disabled { get; set; }
+
+        [JsonProperty("creator")]
+        public User Creator { get; set; }
     }
 
     /// <summary>

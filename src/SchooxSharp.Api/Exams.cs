@@ -34,8 +34,6 @@ namespace SchooxSharp.Api
         /// <returns>Returns a list of all academy exams with extended details.</returns>
         public SchooxResponse<List<Exam>> GetExams(int? start = null, int? limit = null)
         {
-            //TODO: Validate 
-
             //GET /exams
             var request = SService.GenerateBaseRequest("/exams");
             
@@ -55,9 +53,7 @@ namespace SchooxSharp.Api
         public SchooxResponse<List<User>> GetEnrolledUsersInExam(int examId, int? start = null, 
             int? limit = null)
         {
-            //TODO: Validate 
-
-            //GET /exams/15/students?acadid=123&start=&limit=100
+            //GET /exams/:examid/students
             var request = SService.GenerateBaseRequest("/exams/{examId}/students");
 
             request.AddUrlSegment("examId", examId.ToString(CultureInfo.InvariantCulture));
@@ -77,8 +73,6 @@ namespace SchooxSharp.Api
         /// <returns></returns>
         public SchooxResponse<ExamPerformance> GetExamPerformanceForUser(int examId, int userId, int? start = null)
         {
-            //TODO: Validate 
-
             //GET /exams/:examid/students/:userid
             var request = SService.GenerateBaseRequest("/exams/{examId}/students/{userId}"); //, examId, userId);
 

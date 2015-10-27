@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Net;
-using RestSharp;
-using RestSharp.Deserializers;
+﻿using RestSharp;
 using SchooxSharp.Api.Helpers;
 
 namespace SchooxSharp.Api

@@ -42,6 +42,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Courses.cs" />
+    <Compile Include="Models\Coupon.cs" />
+    <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\ExamPerformance.cs" />
     <Compile Include="Models\ExamQuestion.cs" />
     <Compile Include="Roles.cs" />
