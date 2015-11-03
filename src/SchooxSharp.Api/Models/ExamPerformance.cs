@@ -30,7 +30,10 @@ namespace SchooxSharp.Api.Models
 
         public override string ToString()
         {
-            return string.Format("Score: {0}, Points: {1}, PassingScore: {2}, PassingPoints: {3}, Passed: {4}, Questions: {5}", Score, Points, PassingScore, PassingPoints, Passed, Questions);
+            return
+                string.Format(
+                    "Score: {0}, Points: {1}, PassingScore: {2}, PassingPoints: {3}, Passed: {4}, Questions: {5}", Score,
+                    Points, PassingScore, PassingPoints, Passed, Questions);
         }
     }
 }

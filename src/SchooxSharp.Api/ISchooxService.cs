@@ -6,12 +6,6 @@ namespace SchooxSharp.Api
     {
         RestRequest GenerateBaseRequest(string requestPath, bool authenticate = true);
         RestClient SchooxRestClient { get; set; } 
-
-        //string ApiKey {get; set;}
-        //int AcademyId {get; set;}
-        //string BaseUrl {get; set;}
-
-        //Uri BuildUri(string path,  Dictionary<string, object> queries, bool requiresApiAuthentication = true);
     }
 }
 

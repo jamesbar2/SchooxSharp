@@ -11,13 +11,16 @@ namespace SchooxSharp.Api.Models
         public string VerCode { get; set; }
 
         [JsonProperty("total_time")]
-        public int TotalTime { get; set; }
+        public int? TotalTime { get; set; }
 
         [JsonProperty("time_certified")]
         public string TimeCertified { get; set; }
 
         [JsonProperty("url")]
         public string Url { get; set; }
+
+        [JsonProperty("course_id")]
+        public int? CourseId { get; set; }
 
         public override string ToString()
         {

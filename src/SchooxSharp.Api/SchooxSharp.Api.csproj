@@ -39,14 +39,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Courses.cs" />
+    <Compile Include="Curriculums.cs" />
+    <Compile Include="Models\AboveUnit.cs" />
+    <Compile Include="Models\AcademyType.cs" />
     <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\CourseCategory.cs" />
     <Compile Include="Models\ExamPerformance.cs" />
     <Compile Include="Models\ExamQuestion.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\NewJob.cs" />
+    <Compile Include="Models\NewUser.cs" />
+    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Models\UpdateUserJob.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="Exams.cs" />
@@ -69,6 +78,7 @@
     <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using RestSharp;
 
 namespace SchooxSharp.Api
@@ -41,12 +37,16 @@ namespace SchooxSharp.Api
             RequestUrl = response.Request.Resource;
         }
 
+
         /// <summary>
         /// T type of data returned from the response.
         /// </summary>
         public T Data
         {
-            get { return Response.Data; }
+            get
+            {
+                return Response.Data;
+            }
         }
 
         public bool RequestSuccessful

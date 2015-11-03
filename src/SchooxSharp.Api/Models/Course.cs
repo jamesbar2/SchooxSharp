@@ -5,6 +5,11 @@ namespace SchooxSharp.Api.Models
 {
     public class Course
     {
+        public Course()
+        {
+            
+        }
+
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -42,7 +47,7 @@ namespace SchooxSharp.Api.Models
         public string DueDate { get; set; }
 
         [JsonProperty("is_due")]
-        public bool IsDue { get; set; }
+        public bool? IsDue { get; set; }
 
         //Added from list_courses
         [JsonProperty("description")]
@@ -79,7 +84,7 @@ namespace SchooxSharp.Api.Models
         public string Role { get; set; }
 
         [JsonProperty("timecompleted")]
-        public string Timecompleted { get; set; }
+        public string TimeCompleted { get; set; }
 
         [JsonProperty("time")]
         public string Time { get; set; }
@@ -87,8 +92,18 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("time_published")]
         public string TimePublished { get; set; }
 
+        //BUG: If a single entity exists API will return a non-array, if multiple exists API will return array of strings...
         [JsonProperty("scope")]
-        public string Scope { get; set; }
+        public object Scope { get; set; }
+
+        [JsonProperty("lectures_num")]
+        public int? LecturesNum { get; set; }
+
+        [JsonProperty("exams_num")]
+        public int? ExamsNum { get; set; }
+
+        [JsonProperty("materials_num")]
+        public int? MaterialsNum { get; set; }
 
         public override string ToString()
         {
@@ -97,7 +112,7 @@ namespace SchooxSharp.Api.Models
                     "Id: {0}, Title: {1}, Image: {2}, Students: {3}, CompletionRate: {4}, PublishDate: {5}, Url: {6}, Progress: {7}, TotalTime: {8}, EnrollDate: {9}, Certificates: {10}, DueDate: {11}, IsDue: {12}, Description: {13}, Instructor: {14}, Lectures: {15}, Exams: {16}, Level: {17}, Category: {18}, Tags: {19}, Price: {20}, AcademyId: {21}, Priority: {22}, Role: {23}, Timecompleted: {24}, Time: {25}, TimePublished: {26}, Scope: {27}",
                     Id, Title, Image, Students, CompletionRate, PublishDate, Url, Progress, TotalTime, EnrollDate,
                     Certificates, DueDate, IsDue, Description, Instructor, Lectures, Exams, Level, Category, Tags, Price,
-                    AcademyId, Priority, Role, Timecompleted, Time, TimePublished, Scope);
+                    AcademyId, Priority, Role, TimeCompleted, Time, TimePublished, Scope);
         }
     }
 
