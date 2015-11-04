@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SchooxSharp.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchooxSharp.Api.Clients;
 using SchooxSharp.Api.Constants;
 using SchooxSharp.Api.Models;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.ApiTests
+namespace SchooxSharp.Api.Tests.Clients
 {
     [TestClass]
-    public class UsersTests : SchooxTest
+    public class UsersTestsBase : SchooxTestBase
     {
         /// <summary>
         /// Method prefixes all create/edit/delete functions to globally disable 
@@ -29,7 +30,7 @@ namespace SchooxSharp.ApiTests
             Context = context;
         }
 
-        [TestInitializeAttribute]
+        [TestInitialize]
         public void Initialize()
         {
             _users = new Users(new SchooxService("schoox", 386));

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SchooxSharp.Api;
+using SchooxSharp.Api.Clients;
 using SchooxSharp.Api.Constants;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.ApiTests
+namespace SchooxSharp.Api.Tests.Clients
 {
     [TestClass]
-    public class DashboardTests : SchooxTest
+    public class DashboardTestsBase : SchooxTestBase
     {
         private Dashboard _dashboard;
         public static TestContext Context { get; set; }
@@ -18,7 +18,7 @@ namespace SchooxSharp.ApiTests
             Context = context;
         }
 
-        [TestInitializeAttribute]
+        [TestInitialize]
         public void Initialize()
         {
             _dashboard = new Dashboard(new SchooxService("schoox", 386));

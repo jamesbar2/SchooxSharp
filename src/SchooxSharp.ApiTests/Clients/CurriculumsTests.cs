@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SchooxSharp.Api;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchooxSharp.Api.Clients;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.ApiTests
+namespace SchooxSharp.Api.Tests.Clients
 {
     [TestClass()]
-    public class ExamsTests : SchooxTest
+    public class CurriculumsTestsBase : SchooxTestBase
     {
-        private Exams _exams;
+        private Curriculums _curriculums;
         public static TestContext Context { get; set; }
 
         [ClassInitialize]
@@ -20,53 +17,50 @@ namespace SchooxSharp.ApiTests
             Context = context;
         }
 
-        [TestInitializeAttribute]
+        [TestInitialize]
         public void Initialize()
         {
-            _exams = new Exams(new SchooxService("schoox", 386));
+            _curriculums = new Curriculums(new SchooxService("schoox", 386));
         }
 
         [TestMethod()]
-        public void GetExamsTest()
+        public void GetCurriculumsTest()
         {
-            var response = _exams.GetExams();
+            var response = _curriculums.GetCurriculums();
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
             Assert.IsTrue(response.Data.Any());
 
-            Context.WriteLine("Exams returned {0}", response.Data.Count);
+            Context.WriteLine("Curriculums returned {0}", response.Data.Count);
             foreach (var i in response.Data)
                 Context.WriteLine(i.ToString());
             Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod()]
-        public void GetEnrolledUsersInExamTest()
+        public void GetUsersCurriculumsTest()
         {
-            var response = _exams.GetEnrolledUsersInExam(169);
+            var response = _curriculums.GetUsersCurriculums(14);
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
             Assert.IsTrue(response.Data.Any());
 
-            Context.WriteLine("Users returned {0}", response.Data.Count);
+            Context.WriteLine("Curriculums returned {0}", response.Data.Count);
             foreach (var i in response.Data)
                 Context.WriteLine(i.ToString());
-            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
         [TestMethod()]
-        public void GetExamPerformanceForUserTest()
+        public void GetDetailsForCurriculumTest()
         {
-            var response = _exams.GetExamPerformanceForUser(169, 14);
+            var response = _curriculums.GetDetailsForCurriculum(37);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
-            Assert.IsNotNull(response.Data);
-
-            Context.WriteLine("Performance Returned {0}", response.Data.ToString());
-           
+            Context.WriteLine("Curriculums returned {0}", response.Data);
             Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
     }

@@ -5,9 +5,16 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Api", "SchooxSharp.Api\SchooxSharp.Api.csproj", "{BD976C34-FB3B-4E17-9CE1-F6A31F322731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.ApiTests", "SchooxSharp.ApiTests\SchooxSharp.ApiTests.csproj", "{512F41EE-C692-4C76-AB8A-A822947A38BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Api.Tests", "SchooxSharp.ApiTests\SchooxSharp.Api.Tests.csproj", "{512F41EE-C692-4C76-AB8A-A822947A38BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Sample", "SchooxSharp.Sample\SchooxSharp.Sample.csproj", "{82E735D1-80C0-464F-B115-8B31FC3C4C8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84D1898B-6DB5-49F5-AF1E-3FFC1C1B1C6E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

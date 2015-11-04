@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RestSharp;
-using SchooxSharp.Api;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace SchooxSharp.ApiTests
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchooxSharp.Api.Services;
+
+namespace SchooxSharp.Api.Tests.Services
 {
     [TestClass()]
     public class SchooxServiceTests

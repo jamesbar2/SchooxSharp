@@ -1,6 +1,6 @@
-namespace SchooxSharp.ApiTests
+namespace SchooxSharp.Api.Tests.Clients
 {
-    public class SchooxTest
+    public class SchooxTestBase
     {
         public string FormatJsonForOutput(string json)
         {

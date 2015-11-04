@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Services
 {
     public interface ISchooxService
     {

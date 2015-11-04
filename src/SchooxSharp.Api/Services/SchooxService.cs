@@ -2,7 +2,7 @@
 using RestSharp;
 using SchooxSharp.Api.Helpers;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Services
 {
 	public class SchooxService : ISchooxService
 	{

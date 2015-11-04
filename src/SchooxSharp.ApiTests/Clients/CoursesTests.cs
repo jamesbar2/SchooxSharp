@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SchooxSharp.Api;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchooxSharp.Api.Clients;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.ApiTests
+namespace SchooxSharp.Api.Tests.Clients
 {
     [TestClass()]
-    public class CoursesTests :SchooxTest
+    public class CoursesTestsBase :SchooxTestBase
     {
         private Courses _courses;
         public static TestContext Context { get; set; }
@@ -20,7 +17,7 @@ namespace SchooxSharp.ApiTests
             Context = context;
         }
 
-        [TestInitializeAttribute]
+        [TestInitialize]
         public void Initialize()
         {
             _courses = new Courses(new SchooxService("schoox", 386));

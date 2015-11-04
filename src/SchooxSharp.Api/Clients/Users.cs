@@ -6,8 +6,9 @@ using Newtonsoft.Json;
 using RestSharp;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Clients
 {
     /// <summary>
     /// The following requests relate to getting information about users via the Schoox 

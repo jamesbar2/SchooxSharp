@@ -11,6 +11,8 @@
     <AssemblyName>SchooxSharp.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,8 +45,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Courses.cs" />
-    <Compile Include="Curriculums.cs" />
+    <Compile Include="Clients\Courses.cs" />
+    <Compile Include="Clients\Curriculums.cs" />
     <Compile Include="Models\AboveUnit.cs" />
     <Compile Include="Models\AcademyType.cs" />
     <Compile Include="Models\Coupon.cs" />
@@ -58,10 +60,10 @@
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\UpdateUserJob.cs" />
     <Compile Include="Constants\Roles.cs" />
-    <Compile Include="Dashboard.cs" />
-    <Compile Include="Exams.cs" />
+    <Compile Include="Clients\Dashboard.cs" />
+    <Compile Include="Clients\Exams.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
-    <Compile Include="ISchooxService.cs" />
+    <Compile Include="Services\ISchooxService.cs" />
     <Compile Include="Helpers\JsonNetSerializer.cs" />
     <Compile Include="Models\Certificate.cs" />
     <Compile Include="Models\Course.cs" />
@@ -73,10 +75,10 @@
     <Compile Include="Models\PointsScore.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchooxApiBase.cs" />
-    <Compile Include="SchooxResponse.cs" />
-    <Compile Include="SchooxService.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="Clients\SchooxApiBase.cs" />
+    <Compile Include="Services\SchooxResponse.cs" />
+    <Compile Include="Services\SchooxService.cs" />
+    <Compile Include="Clients\Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -87,6 +89,13 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SchooxSharp.Api;
+using SchooxSharp.Api.Clients;
 using SchooxSharp.Api.Constants;
+using SchooxSharp.Api.Services;
 
 namespace SchooxSharp.Sample
 {
@@ -25,6 +24,7 @@ namespace SchooxSharp.Sample
             {
                 Console.WriteLine("Request from\n{0}\n{1} courses returned:", coursesResponse.Response.ResponseUri,
                     coursesResponse.Data.Count);
+                
                 foreach (var course in coursesResponse.Data)
                 {
                     Console.WriteLine("#{0} - {1} - # of Students: {2}", course.Id, course.Title, course.Students);
@@ -41,7 +41,7 @@ namespace SchooxSharp.Sample
             }
             else
             {
-                Console.WriteLine("No courses found for {0}, check the URL\n{1}.", Roles.SchooxInternalEmployee,
+                Console.WriteLine("No courses found or data null for \"{0}\" courses, check the URL\n{1}.", Roles.SchooxInternalEmployee,
                     coursesResponse.Response.ResponseUri);
             }
 

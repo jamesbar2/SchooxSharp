@@ -2,9 +2,9 @@
 using System.Globalization;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
+using SchooxSharp.Api.Services;
 
-
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Clients
 {
 
     /// <summary>

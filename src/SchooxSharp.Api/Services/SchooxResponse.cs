@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using RestSharp;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Services
 {
     /// <summary>
     /// Generic SchooxResponse from a request without Data.

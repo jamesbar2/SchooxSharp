@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
+using SchooxSharp.Api.Services;
 
-namespace SchooxSharp.Api
+namespace SchooxSharp.Api.Clients
 {
     public class Courses : SchooxApiBase
     {
@@ -22,6 +18,12 @@ namespace SchooxSharp.Api
             SService = schooxService;
         }
 
+        /// <summary>
+        /// Returns a list of all courses with extended details.
+        /// </summary>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Max size of retrieved courses</param>
+        /// <returns>List of all courses with extended details</returns>
         public SchooxResponse<List<Course>> GetListOfCourses(int? start = null, int? limit = null)
         {
             //GET /courses
@@ -32,6 +34,14 @@ namespace SchooxSharp.Api
             return Execute<List<Course>>(request);
         }
 
+        /// <summary>
+        /// Returns a list of a user's enrolled & created courses with extended details by his/her schooX ID.
+        /// </summary>
+        /// <param name="userId">User ID of courses to retrieve.</param>
+        /// <param name="tab"></param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Max size of retrieved courses</param>
+        /// <returns>List of courses the user is enrolled in</returns>
         public SchooxResponse<List<Course>> GetListOfUserCourses(int userId, string tab = null, int? start = null,
             int? limit = null)
         {
@@ -47,6 +57,12 @@ namespace SchooxSharp.Api
             return Execute<List<Course>>(request);
         }
 
+        /// <summary>
+        /// Returns extended details of a specific course. A user's progress percentage, time spent and enrollment date can be retrieved by his/her schooX ID.
+        /// </summary>
+        /// <param name="courseId">Course ID for details.</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns>Extended details of a specific course</returns>
         public SchooxResponse<Course> GetDetailsForCourse(int courseId, int? userId = null)
         {
             //GET /courses/:courseid
@@ -59,7 +75,14 @@ namespace SchooxSharp.Api
             return Execute<Course>(request);
         }
 
-        //List of Enrolled Users in a Course
+        /// <summary>
+        /// Returns a list of a course's enrolled users with each user's enrolled date, progress percentage and time spent.
+        /// </summary>
+        /// <param name="courseId">Course ID </param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Max size of retrieved courses</param>
+        /// <returns>A list of a course's enrolled users with each user's enrolled date, progress percentage and time spent</returns>
         public SchooxResponse<List<User>> GetUsersEnrolledInCourse(int courseId, int? userId = null, int? start = null,
             int? limit = null)
         {
@@ -76,7 +99,12 @@ namespace SchooxSharp.Api
             return Execute<List<User>>(request);
         }
         
-        //List of Lectures in a Course
+        /// <summary>
+        /// Returns a list of a course's lectures. You can retrieve a user's progress percentage, time spent and number of views for each lecture by his/her schooX ID.
+        /// </summary>
+        /// <param name="courseId">Course ID</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns>A list of a course's lectures. You can retrieve a user's progress percentage, time spent and number of views for each lecture</returns>
         public SchooxResponse<List<Lecture>> GetLecturesInCourse(int courseId, int? userId = null)
         {
             //GET /courses/:courseid/lectures
@@ -90,7 +118,12 @@ namespace SchooxSharp.Api
             return Execute<List<Lecture>>(request);
         }
 
-        //List of Exams in a Course
+        /// <summary>
+        /// Returns a list of a course's exams. You can retrieve the date of his or her last attempt, total score and points as well as the passing or failure status for each exam by his/her schooX ID.
+        /// </summary>
+        /// <param name="courseId">Course ID</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns>A list of a course's exams</returns>
         public SchooxResponse<List<Exam>> GetExamsInCourse(int courseId, int? userId = null)
         {
             //GET /courses/:courseid/exams
@@ -104,7 +137,12 @@ namespace SchooxSharp.Api
             return Execute<List<Exam>>(request);
         }
         
-        //List of Coupons in a Course
+        /// <summary>
+        /// Returns a list of generated coupons for a specific course.
+        /// </summary>
+        /// <param name="courseId">Course ID</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns>A list of generated coupons for a specific course</returns>
         public SchooxResponse<List<Coupon>> GetCouponsInCourse(int courseId, int? userId = null)
         {
             //GET /courses/:courseid/coupons
@@ -118,7 +156,13 @@ namespace SchooxSharp.Api
             return Execute<List<Coupon>>(request);
         }
         
-        //List of Enrolled Users in a Course Coupon
+        /// <summary>
+        /// Returns a list of a course's enrolled users for a specific coupon with each user's enrolled date, progress percentage and time spent.
+        /// </summary>
+        /// <param name="courseId">Course ID</param>
+        /// <param name="couponId">Coupon ID</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns>A list of a course's enrolled users for a specific coupon with each user's enrolled date, progress percentage and time spent.</returns>
         public SchooxResponse<List<User>> GetUsersUsingCourseCoupon(int courseId, int couponId, int? userId = null)
         {
             //GET /courses/:courseid/coupons/:couponid
@@ -134,13 +178,21 @@ namespace SchooxSharp.Api
         }
 
         
-        //List of all Course Invitations
+        /// <summary>
+        /// You can either assign a course to a user or invite the user to enroll in a course. If you assign the 
+        /// course the user will automatically be enrolled in and the course in considered to be required. If you 
+        /// send an invitation the user will have the option to enroll optionally. This request returns a list of 
+        /// all invitations that have been sent for a particular course.
+        /// </summary>
+        /// <param name="courseId">Course ID</param>
+        /// <param name="userId">User's ID you want to retrieve his/her course list view</param>
+        /// <returns> a list of all invitations that have been sent for a particular course.</returns>
         public SchooxResponse<object> GetCourseInvitations(int courseId, int? userId = null)
         {
+            //TODO: Figure out what object is returned.
+
             //GET /courses/:courseid/invitations
             //https://www.schoox.com/api/v1/courses/11657/invitations?apikey=schoox&acadId=386
-
-            //TODO: Figure out what this returns?
 
             var request = SService.GenerateBaseRequest("/courses/{courseId}/invitations");
             request.AddUrlSegment("courseId", courseId.ToString(CultureInfo.InvariantCulture));
