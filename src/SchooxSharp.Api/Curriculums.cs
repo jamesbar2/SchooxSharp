@@ -50,8 +50,9 @@ namespace SchooxSharp.Api
         {
             //GET /curriculum/:curriculum
             //https://www.schoox.com/api/v1/curriculums/37?apikey=schoox&acadId=386
+            //https://www.schoox.com/api/v1/curriculum/37?apikey=schoox&acadId=386
 
-            var request = SService.GenerateBaseRequest("/curriculum/{curriculumId}");
+            var request = SService.GenerateBaseRequest("/curriculums/{curriculumId}");
             request.AddUrlSegment("curriculumId", curriculumId.ToString(CultureInfo.InvariantCulture));
             request.AddNonBlankQueryString("userId", userId);
 
