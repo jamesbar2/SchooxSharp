@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace SchooxSharp.Api.Models
 {
-    public class Unit
+    public class NewUnit
     {
         [JsonProperty("id")]
         public int? Id { get; set; }
@@ -16,8 +12,8 @@ namespace SchooxSharp.Api.Models
         public string Name { get; set; }
 
         [JsonProperty("above_ids")]
-        public List<AboveUnit> AboveIds { get; set; }
-        
+        public List<int> AboveIds { get; set; }
+
         [JsonProperty("jobs")]
         public List<Job> Jobs { get; set; }
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using SchooxSharp.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SchooxSharp.ApiTests;
 
 namespace SchooxSharp.ApiTests
 {

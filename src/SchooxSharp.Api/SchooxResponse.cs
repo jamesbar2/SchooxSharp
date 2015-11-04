@@ -37,7 +37,6 @@ namespace SchooxSharp.Api
             RequestUrl = response.Request.Resource;
         }
 
-
         /// <summary>
         /// T type of data returned from the response.
         /// </summary>
@@ -45,6 +44,8 @@ namespace SchooxSharp.Api
         {
             get
             {
+                if (Response.Data == null)
+                    return default(T);
                 return Response.Data;
             }
         }
@@ -53,9 +54,8 @@ namespace SchooxSharp.Api
         {
             get
             {
-                if (Response.ErrorException != null)
+                if (Response.ErrorException != null && Response.Content != "null")
                     return false;
-
 
                 switch (Response.Request.Method)
                 {

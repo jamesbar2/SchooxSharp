@@ -5,11 +5,6 @@ namespace SchooxSharp.Api.Models
 {
     public class Course
     {
-        public Course()
-        {
-            
-        }
-
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -69,7 +64,7 @@ namespace SchooxSharp.Api.Models
         public CourseCategory Category { get; set; }
 
         [JsonProperty("tags")]
-        public string[] Tags { get; set; }
+        public List<string> Tags { get; set; }
 
         [JsonProperty("price")]
         public int? Price { get; set; }

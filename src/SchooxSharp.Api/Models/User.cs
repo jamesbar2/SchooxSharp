@@ -8,7 +8,6 @@ namespace SchooxSharp.Api.Models
 {
     public class User
     {
-     
         [JsonProperty("id")]
         public int Id { get; set; }
 

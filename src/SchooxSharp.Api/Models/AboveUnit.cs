@@ -14,6 +14,9 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("type_id")]
         public int TypeId { get; set; }
+
+        [JsonProperty("type")]
+        public string TypeName { get; set; }
     }
 
 }

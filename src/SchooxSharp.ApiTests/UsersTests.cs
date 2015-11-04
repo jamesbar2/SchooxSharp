@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SchooxSharp.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchooxSharp.Api.Models;
 
 namespace SchooxSharp.ApiTests
 {
-    [TestClass()]
+    [TestClass]
     public class UsersTests : SchooxTest
     {
+        /// <summary>
+        /// Method prefixes all create/edit/delete functions to globally disable 
+        /// them with an "ignore" if the test framework is unstable at Schoox.
+        /// </summary>
+        private static void CanDoEdits()
+        {
+            //disable the following line to enable unit tests on create/edit/delete functions
+            Assert.Inconclusive("Editing currently disabled.");
+        }
+
         private Users _users;
         public static TestContext Context { get; set; }
 
@@ -27,7 +34,7 @@ namespace SchooxSharp.ApiTests
             _users = new Users(new SchooxService("schoox", 386));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetUsersTest()
         {
             var response = _users.GetUsers(Roles.Employee);
@@ -42,7 +49,7 @@ namespace SchooxSharp.ApiTests
             Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetDetailsOfUserTest()
         {
             var response = _users.GetDetailsOfUser(14);
@@ -54,9 +61,11 @@ namespace SchooxSharp.ApiTests
             Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void CreateAndAddUserTest()
         {
+            CanDoEdits();
+
             var user = GetBillV1();
             var response = _users.CreateAndAddUser(user);
 
@@ -81,9 +90,11 @@ namespace SchooxSharp.ApiTests
                 new List<int> {1}, new List<int> {4}, new List<int> {1, 4});
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkCreateAndAddUsersTest()
         {
+            CanDoEdits();
+
             var users = new List<NewUser>
             {
                 GetBillV2()
@@ -95,9 +106,11 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void InviteUserTest()
         {
+            CanDoEdits();
+
             var user = GetBillV2();
 
             var response = _users.InviteUser(user);
@@ -106,9 +119,11 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkInviteUsersTest()
         {
+            CanDoEdits();
+
             var users = new List<NewUser> {GetBillV2()};
             var response = _users.BulkInviteUsers(users);
 
@@ -116,9 +131,11 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void EditUserTest()
         {
+            CanDoEdits();
+
             var user = new NewUser("John", "Doe", "pwd", "johndoe@schoox.com", null, null, null, null, null);
             var response = _users.EditUser(1234567890, user);
 
@@ -126,45 +143,55 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void RemoveUserTest()
         {
+            CanDoEdits();
+
             var response = _users.RemoveUser(14);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ReactivateUserTestId()
         {
+            CanDoEdits();
+
             var response = _users.ReactivateUser(3);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ReactivateUserTestExternalId()
         {
+            CanDoEdits();
+
             var response = _users.ReactivateUser("1001417");
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddNewJobTest()
         {
+            CanDoEdits();
+
             var response = _users.AddNewJob(new NewJob {Name = "API Developer", ReportId = 4945});
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkAddNewJobsTest()
         {
+            CanDoEdits();
+
             var response = _users.BulkAddNewJobs(new List<NewJob>
             {
                 new NewJob { Name = "API Developer" },
@@ -175,25 +202,29 @@ namespace SchooxSharp.ApiTests
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void EditJobTest()
         {
+            CanDoEdits();
+
             var response = _users.EditJob(4945, new NewJob {Name = "API Developer"});
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteJobTest()
         {
+            CanDoEdits();
+
             var response = _users.DeleteJob(230);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetJobsTest()
         {
             var response = _users.GetJobs();
@@ -208,154 +239,322 @@ namespace SchooxSharp.ApiTests
             Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UpdateUserRolesTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.UpdateUserRoles(14, new List<string> {Roles.TrainingManager, Roles.HourlyWorker});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UpdateUserJobsTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.UpdateUserJobs(14, new List<UpdateUserJob>
+            {
+                new UpdateUserJob(2002, null, 7160), 
+                new UpdateUserJob(null, 636, 7158, 7156)
+            });
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddUnitsToUserTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.AddUnitsToUser(14, new List<int> {4});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void RemoveUnitsFromUserTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.RemoveUnitsFromUser(14, 35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddAboveUnitsToUserTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.AddAboveUnitsToUser(14, new List<int> { 11, 12});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void RemoveAboveUnitFromUserTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.RemoveAboveUnitFromUser(14, 35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddNewTypeTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.AddNewType("Region");
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkAddNewTypesTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.BulkAddNewTypes(new List<string>{"Region", "Contract"});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void EditTypeTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.EditType(0, "Region");
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteTypeTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.DeleteType(0);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetTypesTest()
         {
-            Assert.Fail();
+            var response = _users.GetTypes();
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+            Assert.IsTrue(response.Data.Any());
+
+            Context.WriteLine("Types returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddNewAboveUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.AddNewAboveUnit(new AboveUnit {TypeId = 101, Name = "Region"});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkAddNewAboveUnitsTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.BulkAddNewAboveUnits(new List<AboveUnit>
+            {
+                new AboveUnit { TypeId = 6, Name = "Greece" },
+                new AboveUnit { TypeId = 6, Name = "US"}
+            });
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void EditAboveUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.EditAboveUnit(20, new AboveUnit{Name = "United States"});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteAboveUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.DeleteAboveUnit(20);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetAboveUnitsTest()
         {
-            Assert.Fail();
+            var response = _users.GetAboveUnits();
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+            Assert.IsTrue(response.Data.Any());
+
+            Context.WriteLine("Above Units returned {0}", response.Data.Count);
+            foreach (var i in response.Data)
+                Context.WriteLine(i.ToString());
+            Context.WriteLine(FormatJsonForOutput(response.Response.Content));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void AddNewUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.AddNewUnit(new NewUnit {Name = "Austin", AboveIds = new List<int> {109}});
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void BulkAddNewUnitsTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.BulkAddNewUnits(new List<NewUnit>
+            {
+                new NewUnit {Name = "Austin", AboveIds = new List<int> {109}},
+                new NewUnit {Name = "Atlanta", AboveIds = new List<int> {85}}
+            });
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void EditUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.EditUnit(35, new NewUnit { AboveIds = new List<int> { 110 } });
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.DeleteUnit(35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
-        public void ListUnitsTest()
+        [TestMethod]
+        public void GetUnitsTest()
         {
-            Assert.Fail();
+            var response = _users.GetUnits();
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+            if (response.Data != null)
+            {
+                Assert.IsTrue(response.Data.Any());
+
+                Context.WriteLine("Archived Units returned {0}", response.Data.Count);
+                foreach (var i in response.Data)
+                    Context.WriteLine(i.ToString());
+                Context.WriteLine(FormatJsonForOutput(response.Response.Content));
+            }
+            else
+            {
+                Context.WriteLine("Server response of \"{0}\"", FormatJsonForOutput(response.Response.Content));
+            }
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ArchiveUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.ArchiveUnit(35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UnarchiveUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.UnarchiveUnit(35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteArchivedUnitTest()
         {
-            Assert.Fail();
+            CanDoEdits();
+
+            var response = _users.DeleteArchivedUnit(35);
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetArchivedUnitsTest()
         {
-            Assert.Fail();
+            var response = _users.GetArchivedUnits();
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+            if (response.Data != null)
+            {
+                Assert.IsTrue(response.Data.Any());
+
+                Context.WriteLine("Archived Units returned {0}", response.Data.Count);
+                foreach (var i in response.Data)
+                    Context.WriteLine(i.ToString());
+                Context.WriteLine(FormatJsonForOutput(response.Response.Content));
+            }
+            else
+            {
+                Context.WriteLine("Server response of \"{0}\"", FormatJsonForOutput(response.Response.Content));
+            }
         }
     }
 }

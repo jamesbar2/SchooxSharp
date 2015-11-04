@@ -29,11 +29,11 @@ namespace SchooxSharp.Api
             request.AddNonBlankQueryString("start", start);
             request.AddNonBlankQueryString("limit", limit);
 
-            //var content = Execute(request).Response;
-            //var item = JsonConvert.DeserializeObject<List<Course>>(content);
+            var content = Execute(request).Response.Content;
+            var item = JsonConvert.DeserializeObject<List<Course>>(content);
             //BUG: Has an error parsing part of the request, but can deserialize just fine in the two lines above.
 
-            //var courses = Execute(request);
+            var courses = Execute(request);
             return Execute<List<Course>>(request);
         }
 

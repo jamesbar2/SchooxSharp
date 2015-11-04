@@ -19,6 +19,8 @@
 
 using System.IO;
 using Newtonsoft.Json;
+using RestSharp;
+using RestSharp.Deserializers;
 using RestSharp.Serializers;
 
 namespace SchooxSharp.Api.Helpers
@@ -27,7 +29,7 @@ namespace SchooxSharp.Api.Helpers
     /// Default JSON serializer for request bodies
     /// Doesn't currently use the SerializeAs attribute, defers to Newtonsoft's attributes
     /// </summary>
-    public class JsonNetSerializer : ISerializer
+    public class JsonNetSerializer : ISerializer//, IDeserializer
     {
         private readonly Newtonsoft.Json.JsonSerializer _serializer;
 
@@ -81,6 +83,17 @@ namespace SchooxSharp.Api.Helpers
         /// Unused for JSON Serialization
         /// </summary>
         public string DateFormat { get; set; }
+
+        //public T Deserialize<T>(IRestResponse response)
+        //{
+        //    if (response.Content == "null")
+        //    {
+        //        return default(T);
+        //    }
+
+        //    return JsonConvert.DeserializeObject<T>(response.Content);
+        //}
+
         /// <summary>
         /// Unused for JSON Serialization
         /// </summary>

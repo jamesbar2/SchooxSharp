@@ -43,6 +43,7 @@ namespace SchooxSharp.Api.Helpers
         public static void SetJsonHandler(this RestRequest request)
         {
             request.JsonSerializer = new JsonNetSerializer();
+            
         }
     }
 }

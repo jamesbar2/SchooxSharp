@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Newtonsoft.Json;
 using RestSharp;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
@@ -499,7 +500,7 @@ namespace SchooxSharp.Api
             return Execute<List<AboveUnit>>(request);
         }
 
-        public SchooxResponse AddNewUnit(Unit unit)
+        public SchooxResponse AddNewUnit(NewUnit unit)
         {
             //POST /units
             //https://www.schoox.com/api/v1/units?apikey=schoox&acadId=386
@@ -511,7 +512,7 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
-        public SchooxResponse BulkAddNewUnits(List<Unit> units )
+        public SchooxResponse BulkAddNewUnits(List<NewUnit> units )
         {
             //POST /units/bulk
             //https://www.schoox.com/api/v1/units/bulk?apikey=schoox&acadId=386
@@ -523,7 +524,7 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
-        public SchooxResponse EditUnit(int unitId, Unit unit, string title = null)
+        public SchooxResponse EditUnit(int unitId, NewUnit unit, string title = null)
         {
             //PUT /units/:unitid
             //https://www.schoox.com/api/v1/units/35?apikey=schoox&acadId=386
@@ -564,6 +565,9 @@ namespace SchooxSharp.Api
             request.AddNonBlankQueryString("above_id", aboveId);
             request.AddNonBlankQueryString("start", start);
             request.AddNonBlankQueryString("limit", limit);
+
+            var content = Execute(request).Response.Content;
+            var units = JsonConvert.DeserializeObject<List<Unit>>(content);
 
             return Execute<List<Unit>>(request);
         }
