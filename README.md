@@ -23,8 +23,10 @@ For example, we reuse many models, despite the entire model not being populated.
 
 Another example lives in the Course model, in particular the "Scope" property is an object.  In cases where there is just one element in scope, it will return a string.  In cases where there are more than one element, it will return an array of strings.  This makes it very difficult to parse reliably.
 
+Another example lives in teh Curriculum model, in some requests object Courses is an integer, and in others it's a List<Course> object.
+
 ##Bugs
-Please submit any bugs to the bug section of this API and we'll look to address them as soon as we can.'
+Please submit any bugs to the bug section of this API and we'll look to address them as soon as we can.
 
 ##Parameters and Nullables/Optionals/Defaults
 Functions with "optional" parameters are exactly that, you don't have to fill them in if you don't want to.  Some parameters are given the defaults that   They exist to let you know what you *must* provide, and what's optional.

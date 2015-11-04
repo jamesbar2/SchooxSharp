@@ -51,8 +51,6 @@ namespace SchooxSharp.Api
 			int? aboveId = null, int? unitId = null, int? jobId = null, int? start = null, 
 			int? limit = 100, string sort = null)
 		{
-			//TODO: Validation
-
 			//GET /dashboard/users
 		    var request = SService.GenerateBaseRequest("/dashboard/users");
             request.Method = Method.GET;
@@ -228,8 +226,6 @@ namespace SchooxSharp.Api
 		/// By default, the value is "false"</param>
         public SchooxResponse<CourseProgress> GetDetailedCourseProgressForUser(int courseId, int userId, string externalId = null)
 		{
-			//TODO: Validation
-
 			//GET /dashboard/courses/:courseid/users/:userid
             var request = SService.GenerateBaseRequest("/dashboard/courses/{courseId}/users/{userId}");
             request.Method = Method.GET;
@@ -249,8 +245,6 @@ namespace SchooxSharp.Api
 		/// <param name="role">Users' role</param>
 		public SchooxResponse<List<Curriculum>> GetCurriculums(string role)
 		{
-			//TODO: Validation
-
 			//GET /dashboard/curriculums
 			var request = SService.GenerateBaseRequest("/dashboard/curriculums");
             request.Method = Method.GET;
@@ -278,8 +272,6 @@ namespace SchooxSharp.Api
 			int? locationId = null, int? jobId = null, string letter = null, int? start = null,
 			int? limit = null, string sort = null)
 		{
-			//TODO: Validation
-
 			//GET /dashboard/curriculums/:curriculumid
 		    var request = SService.GenerateBaseRequest("/dashboard/curriculums/{curriculumId}");
             request.Method = Method.GET;
@@ -310,8 +302,6 @@ namespace SchooxSharp.Api
 		/// By default, the value is "false"</param>
         public SchooxResponse<List<CurriculumProgress>> GetCurriculumProgressForUser(int curriculumId, int userId, string externalId = null)
 		{
-			//TODO: Validation
-
 			//GET /dashboard/curriculums/:curriculumid/users/:userid
 			var request = SService.GenerateBaseRequest("/dashboard/curriculums/{curriculumId}/users/{userId}");
             request.Method = Method.GET;

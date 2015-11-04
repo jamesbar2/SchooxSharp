@@ -1,12 +1,14 @@
-﻿namespace SchooxSharp.Api
+﻿namespace SchooxSharp.Api.Constants
 {
     public static class Roles
     {
-        public const string Employee = "employee";
         public const string Admin = "admin";
         public const string TrainingManager = "training_manager";
         public const string ContentManager = "content_manager";
         public const string ProfessionalInstructor = "professional_instructor";
-        public const string HourlyWorker = "hourly_worker";
+
+        //Schoox Internal Roles
+        public const string SchooxInternalHourlyWorker = "hourly_worker";
+        public const string SchooxInternalEmployee = "employee";
     }
 }

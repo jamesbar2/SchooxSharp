@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Api", "SchooxSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.ApiTests", "SchooxSharp.ApiTests\SchooxSharp.ApiTests.csproj", "{512F41EE-C692-4C76-AB8A-A822947A38BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchooxSharp.Sample", "SchooxSharp.Sample\SchooxSharp.Sample.csproj", "{82E735D1-80C0-464F-B115-8B31FC3C4C8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{512F41EE-C692-4C76-AB8A-A822947A38BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82E735D1-80C0-464F-B115-8B31FC3C4C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E735D1-80C0-464F-B115-8B31FC3C4C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E735D1-80C0-464F-B115-8B31FC3C4C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E735D1-80C0-464F-B115-8B31FC3C4C8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

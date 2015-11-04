@@ -57,7 +57,7 @@
     <Compile Include="Models\NewUser.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\UpdateUserJob.cs" />
-    <Compile Include="Roles.cs" />
+    <Compile Include="Constants\Roles.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="Exams.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />

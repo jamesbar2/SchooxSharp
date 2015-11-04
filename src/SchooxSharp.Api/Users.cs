@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
@@ -82,7 +83,7 @@ namespace SchooxSharp.Api
         /// Creates and adds a user to the academy. Password is mandatory.
         /// </summary>
         /// <param name="user">User object, password is required.  Use the static NewUserForAccount helper.</param>
-        /// <returns>Response from Schoox</returns>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse CreateAndAddUser(NewUser user)
         {
             //POST /users
@@ -99,7 +100,7 @@ namespace SchooxSharp.Api
         /// Creates and adds multiple users (maximum of 10) to the academy via a single request. Password is mandatory.
         /// </summary>
         /// <param name="users">Enumerable lists of users to be added, password is required.  Use the static NewUserForAccount helper.</param>
-        /// <returns>Response from Schoox</returns>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkCreateAndAddUsers(List<NewUser> users)
         {
             //POST /users
@@ -116,7 +117,7 @@ namespace SchooxSharp.Api
         /// Adds a user through an academy invitation. You can simulate the inviting user by adding his/her schooX ID.
         /// </summary>
         /// <param name="user">User object to be invited, use the static NewUserForInvite helper.</param>
-        /// <returns>Response from Schoox</returns>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse InviteUser(NewUser user)
         {
             //POST /users
@@ -133,7 +134,7 @@ namespace SchooxSharp.Api
         /// Adds a user through an academy invitation. You can simulate the inviting user by adding his/her schooX ID.
         /// </summary>
         /// <param name="users">Enumerable list of user objects to be invited, use the static NewUserForInvite helper.</param>
-        /// <returns>Response from Schoox</returns>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkInviteUsers(List<NewUser> users)
         {
             //POST /users/bulk
@@ -153,7 +154,7 @@ namespace SchooxSharp.Api
         /// <param name="userId">Users ID</param>
         /// <param name="user">User to edit.</param>
         /// <param name="externalId">Sets whether the id given is the external_id of the User.  By default, the value is "false"</param>
-        /// <returns>Response from Schoox</returns>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse EditUser(int userId, NewUser user, string externalId = null)
         {
             //PUT /users/:userid
@@ -170,11 +171,11 @@ namespace SchooxSharp.Api
         }
 
         /// <summary>
-        /// 
+        /// Removes a user from the academy.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="externalId"></param>
-        /// <returns></returns>
+        /// <param name="userId">User to remove</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse RemoveUser(int userId, string externalId = null)
         {
             //DELETE /v1/users/:userid
@@ -188,6 +189,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Reactivates a Past Employee as Employee. You can use the User Id or his/her external_id
+        /// </summary>
+        /// <param name="userId">User ID of user to reactivate</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse ReactivateUser(int userId)
         {
             //POST /users
@@ -204,6 +210,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Reactivates a Past Employee as Employee. You can use the User Id or his/her external_id
+        /// </summary>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse ReactivateUser(string externalId)
         {
             //POST /users
@@ -220,6 +231,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates a new job
+        /// </summary>
+        /// <param name="job">Job name, and report_id</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddNewJob(NewJob job)
         {
             //POST /jobs
@@ -231,6 +247,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates multiple academy jobs via a single request
+        /// </summary>
+        /// <param name="jobs">Jobs to be created</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkAddNewJobs(List<NewJob> jobs )
         {
             //POST /jobs/bulk
@@ -242,6 +263,13 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Changes the name and/or the report id of a job.
+        /// </summary>
+        /// <param name="jobId">Job ID to be edited</param>
+        /// <param name="job">Updated job information</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse EditJob(int jobId, NewJob job, string title = null)
         {
             //PUT /jobs/:jobid
@@ -256,6 +284,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Deletes a specified job. It also removes the job from all assigned users.
+        /// </summary>
+        /// <param name="jobId">Job ID to be deleted</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse DeleteJob(int jobId, string title = null)
         {
             //DELETE /jobs/:jobid
@@ -270,6 +304,13 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Returns a list with all jobs of your Academy.
+        /// </summary>
+        /// <param name="search">Search by Job title</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Max items returned per request. Default is 100</param>
+        /// <returns>List of Jobs</returns>
         public SchooxResponse<List<Job>> GetJobs(string search = null, int? start = null, int? limit = null)
         {
             //GET /jobs
@@ -283,6 +324,15 @@ namespace SchooxSharp.Api
             return Execute<List<Job>>(request);
         }
 
+        /// <summary>
+        /// Edit the roles of a given user.
+        /// Available roles are (see Constants.Roles):
+        /// admin, training_manager, content_manager, professional_instructor, hourly_worker
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="roles"></param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse UpdateUserRoles(int userId, List<string> roles, string externalId = null)
         {
             //PUT /users/:userid/roles
@@ -298,6 +348,13 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Edit the jobs of a given user by an array of units/above units & their job Ids. User must be previously assigned to the specified units & above units.
+        /// </summary>
+        /// <param name="userId">User to update</param>
+        /// <param name="jobs">Jobs of the user (Models.UpdateUserJob)</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse UpdateUserJobs(int userId, List<UpdateUserJob> jobs, string externalId = null)
         {
             //PUT /users/:userid/jobs
@@ -313,6 +370,14 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Adds Units to a given User by an array of Unit Ids.
+        /// </summary>
+        /// <param name="userId">User to add units to</param>
+        /// <param name="unitIds">Unit IDs to add</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddUnitsToUser(int userId, List<int> unitIds, string externalId = null, string title = null )
         {
             //PUT /users/:userid/units
@@ -328,6 +393,14 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Adds Units to a given User by an array of Unit Ids.
+        /// </summary>
+        /// <param name="userId">User to remove units from</param>
+        /// <param name="unitId">Unit to remove</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse RemoveUnitsFromUser(int userId, int unitId, string externalId = null, string title = null)
         {
             //DELETE /users/:userid/units/:unitid
@@ -343,6 +416,14 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Adds Aboves Units to a given User by an array of Above Unit Ids.
+        /// </summary>
+        /// <param name="userId">User to add above units to</param>
+        /// <param name="aboveUnitIds">Above units to add</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddAboveUnitsToUser(int userId, List<int> aboveUnitIds, string externalId = null, string title = null)
         {
             //PUT /users/:userid/aboves
@@ -359,6 +440,14 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Removes an Above Unit from a given User
+        /// </summary>
+        /// <param name="userId">User to remove above units from</param>
+        /// <param name="aboveId">Above unit to remove</param>
+        /// <param name="externalId">External ID of user to reactivate</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse RemoveAboveUnitFromUser(int userId, int aboveId, string externalId = null, string title = null)
         {
             //DELETE /users/:userid/aboves/:aboveid
@@ -374,6 +463,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates a new Type.
+        /// </summary>
+        /// <param name="typeName">Type name to add</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddNewType(string typeName)
         {
             //POST /types
@@ -389,6 +483,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates multiple Types via a single request.
+        /// </summary>
+        /// <param name="typeNames">Type names as a list</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkAddNewTypes(List<string> typeNames )
         {
             //POST /types/bulk
@@ -400,7 +499,13 @@ namespace SchooxSharp.Api
 
             return Execute(request);
         }
-
+         
+        /// <summary>
+        /// Changes the name of a Type.
+        /// </summary>
+        /// <param name="typeId">Type ID to edit</param>
+        /// <param name="typeName">New type name</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse EditType(int typeId, string typeName)
         {
             //PUT /types/:typeid
@@ -418,6 +523,11 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Deletes a specified type.
+        /// </summary>
+        /// <param name="typeId">Type to delete</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse DeleteType(int typeId)
         {
             //DELETE /types/:typeid
@@ -430,6 +540,10 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Returns a list of all Types of your Academy.
+        /// </summary>
+        /// <returns>List of Academy Types</returns>
         public SchooxResponse<List<AcademyType>> GetTypes()
         {
             //GET /types
@@ -439,6 +553,11 @@ namespace SchooxSharp.Api
             return Execute<List<AcademyType>>(request);
         }
 
+        /// <summary>
+        /// Creates a new Above Unit and connects it to a Type.
+        /// </summary>
+        /// <param name="aboveUnit">Above unit to add</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddNewAboveUnit(AboveUnit aboveUnit)
         {
             //POST /aboves
@@ -451,8 +570,16 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates multiple Above Units (maximum of 100) via a single request.
+        /// </summary>
+        /// <param name="aboveUnits"></param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkAddNewAboveUnits(List<AboveUnit> aboveUnits )
         {
+            if (aboveUnits != null && aboveUnits.Count > 100)
+                throw new ArgumentOutOfRangeException("aboveUnits", "Too many aboveUnits, maximum is 100.");
+
             //POST /aboves/bulk
             //https://www.schoox.com/api/v1/aboves/bulk?apikey=schoox&acadId=386
 
@@ -464,6 +591,13 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Changes the name and/or the type of an Above Unit.
+        /// </summary>
+        /// <param name="aboveId">Above Unit ID to be edited</param>
+        /// <param name="aboveUnit">Updated AboveUnit object</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse EditAboveUnit(int aboveId, AboveUnit aboveUnit, string title = null)
         {
             //PUT /aboves/:aboveid
@@ -479,6 +613,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Changes the name and/or the type of an Above Unit.
+        /// </summary>
+        /// <param name="aboveId">Above Unit to be deleted</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse DeleteAboveUnit(int aboveId, string title = null)
         {
             //DELETE /aboves/:aboveid
@@ -492,6 +632,14 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Returns a list of Above Units (max. 100/request) of your Academy.
+        /// </summary>
+        /// <param name="typeId">Filter Above Units by Type ID</param>
+        /// <param name="search">Search by Above Unit title</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Number of Above Units to return per request, up to maximum of 100,000. Default to 100</param>
+        /// <returns>List of Above Units</returns>
         public SchooxResponse<List<AboveUnit>> GetAboveUnits(int? typeId = null, string search = null, int? start = null, int? limit = null)
         {
             //GET /aboves
@@ -506,6 +654,11 @@ namespace SchooxSharp.Api
             return Execute<List<AboveUnit>>(request);
         }
 
+        /// <summary>
+        /// Creates a new Unit and connects it to Above Units, via an array of Above Unit ids (above_ids) or an array of Above Unit names (above_names).
+        /// </summary>
+        /// <param name="unit">Unit with names and above IDs</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse AddNewUnit(NewUnit unit)
         {
             //POST /units
@@ -518,8 +671,16 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Creates multiple Units (maximum of 100) via a single request.
+        /// </summary>
+        /// <param name="units">Units to add</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse BulkAddNewUnits(List<NewUnit> units )
         {
+            if(units != null && units.Count > 100)
+                throw new ArgumentOutOfRangeException("units", "Maximum to add is 100.");
+
             //POST /units/bulk
             //https://www.schoox.com/api/v1/units/bulk?apikey=schoox&acadId=386
             var request = SService.GenerateBaseRequest("/units");
@@ -530,6 +691,13 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Changes the name and/or the above units of a Unit.
+        /// </summary>
+        /// <param name="unitId">Unit to change</param>
+        /// <param name="unit">Updated unit</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse EditUnit(int unitId, NewUnit unit, string title = null)
         {
             //PUT /units/:unitid
@@ -546,6 +714,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Deletes a specific Unit.
+        /// </summary>
+        /// <param name="unitId">Unit to delete</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse DeleteUnit(int unitId, string title = null)
         {
             //DELETE /units/:unitid
@@ -560,6 +734,15 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Returns a list of Units of your Academy.
+        /// </summary>
+        /// <param name="search">Search by Unit title</param>
+        /// <param name="searchAbove">Filter by Above Unit title</param>
+        /// <param name="aboveId">Filter Units by an Above Unit Id</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Number of Units to return per request, up to maximum of 100,000. Default to 100</param>
+        /// <returns>List of Units (may be null)</returns>
         public SchooxResponse<List<Unit>> GetUnits(string search = null, string searchAbove = null, int? aboveId = null, int? start = null, int? limit = null)
         {
             //GET /units
@@ -578,6 +761,12 @@ namespace SchooxSharp.Api
             return Execute<List<Unit>>(request);
         }
 
+        /// <summary>
+        /// Archive a Unit.
+        /// </summary>
+        /// <param name="unitId">Unit to archive</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse ArchiveUnit(int unitId, string title = null)
         {
             //PUT /units/:unitid
@@ -596,6 +785,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Unarchive a Unit.
+        /// </summary>
+        /// <param name="unitId">Unit to unarchive.</param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse UnarchiveUnit(int unitId, string title = null)
         {
             //PUT /units/archived/:unitid
@@ -614,6 +809,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// Deletes a specific Archived Unit.
+        /// </summary>
+        /// <param name="unitId">Archived unit to delete </param>
+        /// <param name="title">Sets whether the id given is the current title. By default, the value is "false"</param>
+        /// <returns>SchooxResponse with status information</returns>
         public SchooxResponse DeleteArchivedUnit(int unitId, string title = null)
         {
             //DELETE /units/archived/:unitid
@@ -627,7 +828,15 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
-
+        /// <summary>
+        /// Returns a list of Archived Units of your Academy.
+        /// </summary>
+        /// <param name="search">Search by Unit title</param>
+        /// <param name="searchAbove">Filter by Above Unit title</param>
+        /// <param name="aboveId">Filter Units by an Above Unit Id</param>
+        /// <param name="start">Starting position</param>
+        /// <param name="limit">Number of Units to return per page, up to maximum of 10,000. Default to 100</param>
+        /// <returns>List of Archived Units (may be null)</returns>
         public SchooxResponse<List<Unit>> GetArchivedUnits(string search = null, string searchAbove = null, int? aboveId = null, int? start = null, int? limit = null)
         {
             //GET /units/archived

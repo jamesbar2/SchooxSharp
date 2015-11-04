@@ -120,7 +120,7 @@ namespace SchooxSharp.Api.Models
                     Id, Title, Image, Students, CompletionRate, PublishDate, Url, Progress, TotalTime, EnrollDate,
                     Certificates, DueDate, IsDue, Description, Instructor, Lectures, Exams, Level, Category, Tags, Price,
                     AcademyId, Priority, Role, TimeCompleted, Time, TimePublished, Scope, LecturesNum, ExamsNum,
-                    MaterialsNum;
+                    MaterialsNum);
         }
     }
 

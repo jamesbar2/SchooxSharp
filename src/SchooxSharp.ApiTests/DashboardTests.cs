@@ -2,6 +2,8 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchooxSharp.Api;
+using SchooxSharp.Api.Constants;
+
 namespace SchooxSharp.ApiTests
 {
     [TestClass]
@@ -25,7 +27,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetUsersTest()
         {
-            var response = _dashboard.GetUsers(Roles.Employee);
+            var response = _dashboard.GetUsers(Roles.SchooxInternalEmployee);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
@@ -85,7 +87,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetCoursesTest()
         {
-            var response = _dashboard.GetCourses(Roles.Employee);
+            var response = _dashboard.GetCourses(Roles.SchooxInternalEmployee);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
@@ -100,7 +102,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetEnrolledUsersInCourseTest()
         {
-            var response = _dashboard.GetEnrolledUsersInCourse(11657, Roles.Employee, 1, 4, letter: "A", start: 0, limit: 100,
+            var response = _dashboard.GetEnrolledUsersInCourse(11657, Roles.SchooxInternalEmployee, 1, 4, letter: "A", start: 0, limit: 100,
                 sort: "firstname");
 
             Assert.IsNotNull(response);
@@ -133,7 +135,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetCurriculumsTest()
         {
-            var response = _dashboard.GetCurriculums(Roles.Employee);
+            var response = _dashboard.GetCurriculums(Roles.SchooxInternalEmployee);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
@@ -148,7 +150,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetEnrolledUsersInCurriculumTest()
         {
-            var response = _dashboard.GetEnrolledUsersInCurriculum(37, Roles.Employee, 1, 4, 7, "A", 0, 100,
+            var response = _dashboard.GetEnrolledUsersInCurriculum(37, Roles.SchooxInternalEmployee, 1, 4, 7, "A", 0, 100,
                 "firstname");
 
             Assert.IsNotNull(response);
@@ -182,7 +184,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetExamsTest()
         {
-            var response = _dashboard.GetExams(Roles.Employee);
+            var response = _dashboard.GetExams(Roles.SchooxInternalEmployee);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
@@ -197,7 +199,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetEnrolledUsersInExamTest()
         {
-            var response = _dashboard.GetEnrolledUsersInExam(169, Roles.Employee, 1, 4, letter: "A", start:0, limit: 100, sort: "firstname");
+            var response = _dashboard.GetEnrolledUsersInExam(169, Roles.SchooxInternalEmployee, 1, 4, letter: "A", start:0, limit: 100, sort: "firstname");
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);

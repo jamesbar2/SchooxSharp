@@ -2,6 +2,7 @@
 using System.Linq;
 using SchooxSharp.Api;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchooxSharp.Api.Constants;
 using SchooxSharp.Api.Models;
 
 namespace SchooxSharp.ApiTests
@@ -37,7 +38,7 @@ namespace SchooxSharp.ApiTests
         [TestMethod]
         public void GetUsersTest()
         {
-            var response = _users.GetUsers(Roles.Employee);
+            var response = _users.GetUsers(Roles.SchooxInternalEmployee);
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
@@ -76,7 +77,7 @@ namespace SchooxSharp.ApiTests
         private static NewUser GetBillV1()
         {
             return new NewUser("BillTest4", "Lolos5", "123456", "graecus84@yahoo.gr",
-                new List<string> { Roles.Employee }, new List<int> { 18 }, new List<int> { 4 },
+                new List<string> { Roles.SchooxInternalEmployee }, new List<int> { 18 }, new List<int> { 4 },
                 new List<NewUser.NewUserJob>
                 {
                     new NewUser.NewUserJob(4, null, 2455),
@@ -86,7 +87,7 @@ namespace SchooxSharp.ApiTests
 
         private static NewUser GetBillV2()
         {
-            return new NewUser("Bill", "Lolos", null, "graecus84@yahoo.gr", new List<string> {Roles.Employee},
+            return new NewUser("Bill", "Lolos", null, "graecus84@yahoo.gr", new List<string> {Roles.SchooxInternalEmployee},
                 new List<int> {1}, new List<int> {4}, new List<int> {1, 4});
         }
 
@@ -244,7 +245,7 @@ namespace SchooxSharp.ApiTests
         {
             CanDoEdits();
 
-            var response = _users.UpdateUserRoles(14, new List<string> {Roles.TrainingManager, Roles.HourlyWorker});
+            var response = _users.UpdateUserRoles(14, new List<string> {Roles.TrainingManager, Roles.SchooxInternalHourlyWorker});
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
