@@ -29,7 +29,7 @@ namespace SchooxSharp.Api.Helpers
     /// Default JSON serializer for request bodies
     /// Doesn't currently use the SerializeAs attribute, defers to Newtonsoft's attributes
     /// </summary>
-    public class JsonNetSerializer : ISerializer//, IDeserializer
+    public class JsonNetSerializer : ISerializer
     {
         private readonly Newtonsoft.Json.JsonSerializer _serializer;
 
@@ -43,8 +43,7 @@ namespace SchooxSharp.Api.Helpers
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Include,
-                DefaultValueHandling = DefaultValueHandling.Include
-                
+                DefaultValueHandling = DefaultValueHandling.Include  
             };
         }
 
@@ -83,16 +82,6 @@ namespace SchooxSharp.Api.Helpers
         /// Unused for JSON Serialization
         /// </summary>
         public string DateFormat { get; set; }
-
-        //public T Deserialize<T>(IRestResponse response)
-        //{
-        //    if (response.Content == "null")
-        //    {
-        //        return default(T);
-        //    }
-
-        //    return JsonConvert.DeserializeObject<T>(response.Content);
-        //}
 
         /// <summary>
         /// Unused for JSON Serialization

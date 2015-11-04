@@ -57,16 +57,6 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("profile_url")]
         public string ProfileUrl { get; set; }
 
-        public override string ToString()
-        {
-            return
-                string.Format(
-                    "Id: {0}, Firstname: {1}, Lastname: {2}, Email: {3}, Image: {4}, Url: {5}, TotalCourseHours: {6}, TotalCourses: {7}, TotalExams: {8}, DueDate: {9}, Progress: {10}, Time: {11}, EnrollmentDate: {12}, Attempts: {13}",
-                    Id, FirstName, LastName, Email, Image, Url, TotalCourseHours, TotalCourses, TotalExams, DueDate,
-                    Progress, Time, EnrollmentDate, Attempts);
-        }
-
-
         [JsonProperty("active")]
         public bool? Active { get; set; }
 
@@ -78,6 +68,15 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("certificates")]
         public List<Certificate> Certificates { get; set; }
+
+        public override string ToString()
+        {
+            return
+                string.Format(
+                    "Id: {0}, FirstName: {1}, LastName: {2}, Password: {3}, Email: {4}, Image: {5}, Url: {6}, TotalCourseHours: {7}, TotalCourses: {8}, TotalExams: {9}, DueDate: {10}, Progress: {11}, Time: {12}, EnrollmentDate: {13}, Attempts: {14}, ProfileUrl: {15}, Active: {16}, Roles: {17}, Units: {18}, Certificates: {19}",
+                    Id, FirstName, LastName, Password, Email, Image, Url, TotalCourseHours, TotalCourses, TotalExams,
+                    DueDate, Progress, Time, EnrollmentDate, Attempts, ProfileUrl, Active, Roles, Units, Certificates);
+        }
     }
 
 }

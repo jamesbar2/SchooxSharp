@@ -24,8 +24,7 @@ namespace SchooxSharp.Api.Models
 
         public override string ToString()
         {
-            return string.Format("Id: {0}, VerCode: {1}, TotalTime: {2}, TimeCertified: {3}, Url: {4}", Id, VerCode,
-                TotalTime, TimeCertified, Url);
+            return string.Format("Id: {0}, VerCode: {1}, TotalTime: {2}, TimeCertified: {3}, Url: {4}, CourseId: {5}", Id, VerCode, TotalTime, TimeCertified, Url, CourseId);
         }
     }
 }

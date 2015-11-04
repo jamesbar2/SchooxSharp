@@ -91,6 +91,19 @@ namespace SchooxSharp.Api.Models
 
             [JsonProperty("above_id")]
             public int? AboveId { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("UnitId: {0}, Jobs: {1}, AboveId: {2}", UnitId, Jobs, AboveId);
+            }
+        }
+
+        public override string ToString()
+        {
+            return
+                string.Format(
+                    "Firstname: {0}, Lastname: {1}, Password: {2}, Roles: {3}, Email: {4}, AboveIds: {5}, UnitIds: {6}, JobIds: {7}, Jobs: {8}, Language: {9}",
+                    Firstname, Lastname, Password, Roles, Email, AboveIds, UnitIds, JobIds, Jobs, Language);
         }
     }
 

@@ -42,5 +42,14 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("time_accepted")]
         public string TimeAccepted { get; set; }
+
+        public override string ToString()
+        {
+            return
+                string.Format(
+                    "Id: {0}, Code: {1}, Price: {2}, Discount: {3}, Quota: {4}, Active: {5}, TimeCreated: {6}, UserId: {7}, Type: {8}, MaxQuota: {9}, AcademyId: {10}, ExpirationDate: {11}, TimeAccepted: {12}",
+                    Id, Code, Price, Discount, Quota, Active, TimeCreated, UserId, Type, MaxQuota, AcademyId,
+                    ExpirationDate, TimeAccepted);
+        }
     }
 }

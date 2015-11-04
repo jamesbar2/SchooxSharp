@@ -104,10 +104,11 @@ namespace SchooxSharp.Api.Models
         {
             return
                 string.Format(
-                    "Id: {0}, Title: {1}, Image: {2}, Students: {3}, CompletionRate: {4}, PublishDate: {5}, Url: {6}, Progress: {7}, TotalTime: {8}, EnrollDate: {9}, Certificates: {10}, DueDate: {11}, IsDue: {12}, Description: {13}, Instructor: {14}, Lectures: {15}, Exams: {16}, Level: {17}, Category: {18}, Tags: {19}, Price: {20}, AcademyId: {21}, Priority: {22}, Role: {23}, Timecompleted: {24}, Time: {25}, TimePublished: {26}, Scope: {27}",
+                    "Id: {0}, Title: {1}, Image: {2}, Students: {3}, CompletionRate: {4}, PublishDate: {5}, Url: {6}, Progress: {7}, TotalTime: {8}, EnrollDate: {9}, Certificates: {10}, DueDate: {11}, IsDue: {12}, Description: {13}, Instructor: {14}, Lectures: {15}, Exams: {16}, Level: {17}, Category: {18}, Tags: {19}, Price: {20}, AcademyId: {21}, Priority: {22}, Role: {23}, TimeCompleted: {24}, Time: {25}, TimePublished: {26}, Scope: {27}, LecturesNum: {28}, ExamsNum: {29}, MaterialsNum: {30}",
                     Id, Title, Image, Students, CompletionRate, PublishDate, Url, Progress, TotalTime, EnrollDate,
                     Certificates, DueDate, IsDue, Description, Instructor, Lectures, Exams, Level, Category, Tags, Price,
-                    AcademyId, Priority, Role, TimeCompleted, Time, TimePublished, Scope);
+                    AcademyId, Priority, Role, TimeCompleted, Time, TimePublished, Scope, LecturesNum, ExamsNum,
+                    MaterialsNum;
         }
     }
 

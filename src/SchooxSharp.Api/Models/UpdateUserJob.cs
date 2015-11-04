@@ -27,6 +27,11 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("above_unit")]
         public int? AboveUnit { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Unit: {0}, Jobs: {1}, AboveUnit: {2}", Unit, Jobs, AboveUnit);
+        }
     }
 
 }

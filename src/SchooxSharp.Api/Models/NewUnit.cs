@@ -16,5 +16,10 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("jobs")]
         public List<Job> Jobs { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Id: {0}, Name: {1}, AboveIds: {2}, Jobs: {3}", Id, Name, AboveIds, Jobs);
+        }
     }
 }

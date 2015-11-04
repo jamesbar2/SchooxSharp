@@ -17,6 +17,11 @@ namespace SchooxSharp.Api.Models
 
         [JsonProperty("report_id")]
         public int? ReportId { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name: {0}, ReportId: {1}", Name, ReportId);
+        }
     }
 
 }
