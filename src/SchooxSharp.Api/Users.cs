@@ -169,6 +169,12 @@ namespace SchooxSharp.Api
             return Execute(request);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="externalId"></param>
+        /// <returns></returns>
         public SchooxResponse RemoveUser(int userId, string externalId = null)
         {
             //DELETE /v1/users/:userid

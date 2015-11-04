@@ -29,11 +29,6 @@ namespace SchooxSharp.Api
             request.AddNonBlankQueryString("start", start);
             request.AddNonBlankQueryString("limit", limit);
 
-            var content = Execute(request).Response.Content;
-            var item = JsonConvert.DeserializeObject<List<Course>>(content);
-            //BUG: Has an error parsing part of the request, but can deserialize just fine in the two lines above.
-
-            var courses = Execute(request);
             return Execute<List<Course>>(request);
         }
 
@@ -49,8 +44,6 @@ namespace SchooxSharp.Api
             request.AddNonBlankQueryString("tab", tab);
             request.AddNonBlankQueryString("start", start);
 
-            //BUG: Has an error parsing part of the request, but can deserialize just fine in the two lines above.
-
             return Execute<List<Course>>(request);
         }
 
@@ -62,8 +55,6 @@ namespace SchooxSharp.Api
             var request = SService.GenerateBaseRequest("/courses/{courseId}");
             request.AddUrlSegment("courseId", courseId.ToString(CultureInfo.InvariantCulture));
             request.AddNonBlankQueryString("userId", userId);
-
-            //BUG: Has an error parsing part of the request, but can deserialize just fine in the two lines above.
 
             return Execute<Course>(request);
         }

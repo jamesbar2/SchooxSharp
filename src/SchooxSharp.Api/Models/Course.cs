@@ -91,6 +91,18 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("scope")]
         public object Scope { get; set; }
 
+        public List<string> ScopeAsList
+        {
+            get
+            {
+                if (Scope == null)
+                    return new List<string>();
+                if (Scope is string)
+                    return new List<string> {Scope.ToString()};
+                return new List<string>((string[])Scope);
+            }
+        }
+
         [JsonProperty("lectures_num")]
         public int? LecturesNum { get; set; }
 
