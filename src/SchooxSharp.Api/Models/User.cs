@@ -17,9 +17,6 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("lastname")]
         public string LastName { get; set; }
 
-        [JsonProperty("password")]
-        public string Password { get; set; }
-
         [JsonProperty("email")]
         public string Email { get; set; }
 
