@@ -11,6 +11,10 @@ namespace SchooxSharp.Api.Models
         [JsonProperty("id")]
         public int Id { get; set; }
 
+		//TODO: Confirm the JsonProperty is actually "userid"
+		[JsonProperty("userid")]
+		public string UserId { get; set; }
+
         [JsonProperty("firstname")]
         public string FirstName { get; set; }
 

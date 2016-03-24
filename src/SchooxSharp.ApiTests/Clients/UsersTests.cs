@@ -36,6 +36,21 @@ namespace SchooxSharp.Api.Tests.Clients
             _users = new Users(new SchooxService("schoox", 386));
         }
 
+		[TestMethod]
+		public void GetAndEnumerateAllUsersTest()
+		{
+			var response = _users.GetAndEnumerateAllUsers(Roles.SchooxInternalEmployee, limit: 1);
+
+			Assert.IsNotNull(response);
+			Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
+			Assert.IsTrue(response.Data.Any());
+
+			Context.WriteLine("Users returned {0}", response.Data.Count);
+			foreach (var i in response.Data)
+				Context.WriteLine(i.ToString());
+			Context.WriteLine(FormatJsonForOutput(response.Response.Content));
+		}
+
         [TestMethod]
         public void GetUsersTest()
         {

@@ -7,6 +7,7 @@ using RestSharp;
 using SchooxSharp.Api.Helpers;
 using SchooxSharp.Api.Models;
 using SchooxSharp.Api.Services;
+using System.Configuration;
 
 namespace SchooxSharp.Api.Clients
 {
@@ -21,6 +22,16 @@ namespace SchooxSharp.Api.Clients
     /// </summary>
     public class Users : SchooxApiBase
     {
+		private int MaximumAllUsersRequestLimit
+		{
+			get
+			{
+				int max = 1000;
+				int.TryParse (ConfigurationManager.AppSettings ["SchooxSharp.AllUsersRequestLimit"], out max);
+				return max;
+			}
+		}
+
         public Users()
         {
             SService = new SchooxService();
@@ -30,6 +41,55 @@ namespace SchooxSharp.Api.Clients
         {
             SService = service;
         }
+
+		/// <summary>
+		/// Iterates through all "pages" of users to build a list of all users in the system.
+		/// WARNING: This function should only be used on smaller user lists, writing your own
+		/// enumerable or async function is a more efficient route than this function.  Also, 
+		/// any failures will be ignored.
+		/// </summary>
+		/// <param name="role">Role of users</param>
+		/// <param name="past">List Past Employees if given role is "employee". Default value is "false"</param>
+		/// <param name="search">Search by user's firstname or lastname</param>
+		/// <param name="aboveId">Above Unit's ID</param>
+		/// <param name="unitId">Unit's ID</param>
+		/// <param name="jobId">Job's ID</param>
+		/// <param name="limit">Max is 1,000; depending on your users connection, adjust this.</param>
+		/// <returns>Returns a list of academy's users.</returns>
+		public List<User> GetAndEnumerateAllUsers(string role, string past = null, string search = null, 
+			int? aboveId = null, int? unitId = null, int? jobId = null, int? limit = 1000)
+		{
+			//GET /users
+			//https://www.schoox.com/api/v1/users?role=employee&apikey=schoox&acadId=386
+
+			var start = 0;
+			if(!limit.HasValue)
+				limit = MaximumAllUsersRequestLimit;	//max for now is 1000
+			var lastTotal = 0;
+
+			var request = SService.GenerateBaseRequest("/users");
+			request.AddNonBlankQueryString("role", role);
+			request.AddNonBlankQueryString("past", past);
+			request.AddNonBlankQueryString("search", search);
+			request.AddNonBlankQueryString("aboveId", aboveId);
+			request.AddNonBlankQueryString("unitId", unitId);
+			request.AddNonBlankQueryString("jobId", jobId);
+			request.AddNonBlankQueryString("start", start);
+			request.AddNonBlankQueryString("limit", limit);
+
+			var bigAUserList = new List<User> ();
+			for (start = 0; lastTotal <= limit.Value; start += limit.Value) {
+				request.Parameters.Remove (request.Parameters.Single (u => u.Name == "start")); //we can request the single since we just added start, theres no possibility for null
+				request.AddNonBlankQueryString("start", start);
+
+				var result = Execute<List<User>> (request);
+				if (result.RequestSuccessful)
+					lastTotal = result.Data.Count;
+					bigAUserList.AddRange (result.Data);
+			}
+
+			return bigAUserList;
+		}
 
         /// <summary>
         /// Returns a list of academy's users. A role must be specified. Available values are: employee, customer, instructor & member.
