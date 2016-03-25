@@ -42,8 +42,9 @@ namespace SchooxSharp.Api.Tests.Clients
 			var response = _users.GetAndEnumerateAllUsers(Roles.SchooxInternalEmployee, limit: 1);
 
 			Assert.IsNotNull(response);
-			Assert.IsTrue(response.RequestSuccessful, response.Response.ErrorMessage);
-			Assert.IsTrue(response.Data.Any());
+			Assert.IsTrue(response.Any());
+			//Assert.IsTrue(response.Data.Any());
+			Assert.IsTrue(response.Count() > 1);
 
 			Context.WriteLine("Users returned {0}", response.Data.Count);
 			foreach (var i in response.Data)
