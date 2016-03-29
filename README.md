@@ -3,11 +3,11 @@
 ###Documentation
 We've tried to include as much of the documentation from the API's web site as possible.  Please use the support site for the most up to date information about the API. https://www.schoox.com/api/docs
 
-###Installation
+<!--###Installation
 You can install this through Nuget (currently in pre-release) by finding SchooxSharp.Api in the Package Manager or by using the Package Manager Console with the following command:
 ```cmd
   PM> Install-Package SchooxSharp.Api -Pre
-```
+```-->
 ###Getting Started
 ####Configuration
 There are two ways to configure the services, the recommended method is to add the API Key and Academy ID to your applications AppSettings configuration area; optionally, you can add the Base URL as well (although, you likely won't need to do this unless we introduce a staging API).
