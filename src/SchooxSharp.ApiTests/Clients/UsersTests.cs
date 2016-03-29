@@ -39,17 +39,16 @@ namespace SchooxSharp.Api.Tests.Clients
 		[TestMethod]
 		public void GetAndEnumerateAllUsersTest()
 		{
-			var response = _users.GetAndEnumerateAllUsers(Roles.SchooxInternalEmployee, limit: 1);
+			var response = _users.GetAndEnumerateAllUsers(Roles.SchooxInternalEmployee, limit: 13);
 
 			Assert.IsNotNull(response);
 			Assert.IsTrue(response.Any());
-			//Assert.IsTrue(response.Data.Any());
-			Assert.IsTrue(response.Count() > 1);
+			Assert.IsTrue(response.Count() >= 2);
 
-			Context.WriteLine("Users returned {0}", response.Data.Count);
-			foreach (var i in response.Data)
+			Context.WriteLine("Users returned {0}", response.Count);
+			foreach (var i in response)
 				Context.WriteLine(i.ToString());
-			Context.WriteLine(FormatJsonForOutput(response.Response.Content));
+			//Context.WriteLine(FormatJsonForOutput(response.Response.Content));
 		}
 
         [TestMethod]

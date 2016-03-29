@@ -12,14 +12,17 @@ namespace SchooxSharp.Api.Models
         public int Id { get; set; }
 
 		//TODO: Confirm the JsonProperty is actually "userid"
-		[JsonProperty("userid")]
-		public string UserId { get; set; }
+        [JsonProperty("userid")]
+        public string UserId { get; set; }
 
         [JsonProperty("firstname")]
         public string FirstName { get; set; }
 
         [JsonProperty("lastname")]
         public string LastName { get; set; }
+        
+        [JsonProperty("password")]		
+        public string Password { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }
@@ -73,9 +76,10 @@ namespace SchooxSharp.Api.Models
         {
             return
                 string.Format(
-                    "Id: {0}, FirstName: {1}, LastName: {2}, Password: {3}, Email: {4}, Image: {5}, Url: {6}, TotalCourseHours: {7}, TotalCourses: {8}, TotalExams: {9}, DueDate: {10}, Progress: {11}, Time: {12}, EnrollmentDate: {13}, Attempts: {14}, ProfileUrl: {15}, Active: {16}, Roles: {17}, Units: {18}, Certificates: {19}",
+                    "Id: {0}, FirstName: {1}, LastName: {2}, Password: {3}, Username:{20}, Email: {4}, Image: {5}, Url: {6}, TotalCourseHours: {7}, TotalCourses: {8}, TotalExams: {9}, DueDate: {10}, Progress: {11}, Time: {12}, EnrollmentDate: {13}, Attempts: {14}, ProfileUrl: {15}, Active: {16}, Roles: {17}, Units: {18}, Certificates: {19}",
                     Id, FirstName, LastName, Password, Email, Image, Url, TotalCourseHours, TotalCourses, TotalExams,
-                    DueDate, Progress, Time, EnrollmentDate, Attempts, ProfileUrl, Active, Roles, Units, Certificates);
+                    DueDate, Progress, Time, EnrollmentDate, Attempts, ProfileUrl, Active, Roles, Units, Certificates,
+                    UserId);
         }
     }
 

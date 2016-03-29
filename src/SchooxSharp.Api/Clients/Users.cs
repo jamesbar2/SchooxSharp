@@ -86,6 +86,9 @@ namespace SchooxSharp.Api.Clients
 				if (result.RequestSuccessful)
 					lastTotal = result.Data.Count;
 					bigAUserList.AddRange (result.Data);
+
+			    if (lastTotal < limit)
+			        break;
 			}
 
 			return bigAUserList;
