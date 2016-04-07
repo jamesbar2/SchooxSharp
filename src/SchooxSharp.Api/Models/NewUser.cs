@@ -18,7 +18,7 @@ namespace SchooxSharp.Api.Models
         }
 
         public NewUser(string firstName, string lastName, string password, string email, List<string> roles,
-            List<int> aboveIds, List<int> unitIds, List<NewUserJob> jobs, string language)
+            List<int> aboveIds, List<int> unitIds, List<NewUserJob> jobs, string language, string username)
         {
             Firstname = firstName;
             Lastname = lastName;
@@ -29,10 +29,11 @@ namespace SchooxSharp.Api.Models
             UnitIds = unitIds;
             Jobs = jobs;
             Language = language;
+            Username = username;
         }
 
         public NewUser(string firstName, string lastName, string password, string email, List<string> roles,
-            List<int> aboveIds, List<int> unitIds, List<int> jobIds)
+            List<int> aboveIds, List<int> unitIds, List<int> jobIds, string username)
         {
             Firstname = firstName;
             Lastname = lastName;
@@ -42,7 +43,11 @@ namespace SchooxSharp.Api.Models
             AboveIds = aboveIds;
             UnitIds = unitIds;
             JobIds = jobIds;
+            Username = username;
         }
+
+        [JsonProperty("username")]
+        public string Username { get; set; }
 
         [JsonProperty("firstname")]
         public string Firstname { get; set; }
@@ -102,8 +107,8 @@ namespace SchooxSharp.Api.Models
         {
             return
                 string.Format(
-                    "Firstname: {0}, Lastname: {1}, Password: {2}, Roles: {3}, Email: {4}, AboveIds: {5}, UnitIds: {6}, JobIds: {7}, Jobs: {8}, Language: {9}",
-                    Firstname, Lastname, Password, Roles, Email, AboveIds, UnitIds, JobIds, Jobs, Language);
+                    "Username: {0}, Firstname: {1}, Lastname: {2}, Password: {3}, Roles: {4}, Email: {5}, AboveIds: {6}, UnitIds: {7}, JobIds: {8}, Jobs: {9}, Language: {10}",
+                    Username, Firstname, Lastname, Password, Roles, Email, AboveIds, UnitIds, JobIds, Jobs, Language);
         }
     }
 
